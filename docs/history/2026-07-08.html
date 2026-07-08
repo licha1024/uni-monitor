@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,36 @@ body {
   line-height: 1.6;
   min-height: 100vh;
 }
+/* Language switching: hide the inactive language */
+html[data-lang="zh"] .lang-en { display: none; }
+html[data-lang="en"] .lang-zh { display: none; }
+/* Default before JS runs: show Chinese (Chinese is the site's default) */
+.lang-en { display: none; }
+html[data-lang="en"] .lang-en { display: inline; }
+html[data-lang="en"] .lang-zh { display: none; }
+
 .container { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
 header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px; }
-header .title { display: flex; align-items: baseline; gap: 12px; }
+header .title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+header .title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 header h1 { font-size: 28px; letter-spacing: -0.5px; }
 header .subtitle { color: var(--text-dim); font-size: 14px; }
 header .nav { margin-top: 12px; display: flex; gap: 20px; font-size: 14px; }
 header .nav a { color: var(--accent); text-decoration: none; }
 header .nav a:hover { text-decoration: underline; }
+.lang-toggle {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 48px;
+  transition: all 0.15s;
+}
+.lang-toggle:hover { background: var(--panel-2); border-color: var(--accent); color: var(--accent); }
 .stance-pill {
   display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.5px;
@@ -71,80 +93,106 @@ a { color: var(--accent); }
 .badge-info { color: var(--text-dim); font-size: 12px; }
 code { background: var(--panel-2); padding: 2px 6px; border-radius: 3px; font-size: 13px; }
 </style>
+<script>
+  (function() {
+    try {
+      var lang = localStorage.getItem('uniMonitorLang') || 'zh';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+    } catch (e) {
+      document.documentElement.setAttribute('data-lang', 'zh');
+    }
+  })();
+</script>
 </head>
 <body>
 <div class="container">
   
 <header>
-  <div class="title">
-    <h1>UNI Monitor</h1>
-    <span class="subtitle">Report for 2026-07-08</span>
+  <div class="title-row">
+    <div class="title">
+      <h1>UNI Monitor</h1>
+      <span class="subtitle"><span class="lang-en">Report for 2026-07-08</span><span class="lang-zh">2026-07-08 报告</span></span>
+    </div>
+    <button id="lang-toggle" class="lang-toggle" title="Switch language / 切换语言">
+      <span class="lang-en">中</span><span class="lang-zh">EN</span>
+    </button>
   </div>
   <nav class="nav">
-    <a href="../index.html">Latest</a>
-    <a href="../history.html">History</a>
-    <a href="https://github.com/licha1024/uni-monitor" target="_blank">GitHub</a>
+    <a href="../index.html"><span class="lang-en">Latest</span><span class="lang-zh">最新</span></a>
+    <a href="../history.html"><span class="lang-en">History</span><span class="lang-zh">历史</span></a>
+    <a href="https://github.com/licha1024/uni-monitor" target="_blank"><span class="lang-en">GitHub</span><span class="lang-zh">GitHub</span></a>
   </nav>
 </header>
 
 
-  <span class="stance-pill stance-bearish">bearish · medium confidence</span>
-  <p class="headline">UNI's 14% weekly bounce is narrative fuel from the v4 fee temp check, but the burn math is still net inflationary and the real-yield catalyst is absent.</p>
+  <span class="stance-pill stance-bearish"><span class="lang-en">BEARISH</span><span class="lang-zh">看空</span> · <span class="lang-en">medium</span><span class="lang-zh">中</span> <span class="lang-en">confidence</span><span class="lang-zh">置信度</span></span>
+  <p class="headline"><span class="lang-en"></span><span class="lang-zh"></span></p>
 
-  <h2>Market</h2>
+  <h2><span class="lang-en">Market</span><span class="lang-zh">市场</span></h2>
   <div class="metrics">
-    <div class="metric"><span class="metric-label">Price</span><span class="metric-value">$3.2000</span></div>
-    <div class="metric"><span class="metric-label">24h</span><span class="metric-value pos">+1.08%</span></div>
-    <div class="metric"><span class="metric-label">7d</span><span class="metric-value pos">+14.40%</span></div>
-    <div class="metric"><span class="metric-label">24h Volume</span><span class="metric-value">$237.35M</span></div>
-    <div class="metric"><span class="metric-label">Market Cap</span><span class="metric-value">$2.00B</span></div>
-    <div class="metric"><span class="metric-label">FDV</span><span class="metric-value">$2.87B</span></div>
-    <div class="metric"><span class="metric-label">ATH Distance</span><span class="metric-value neg">-92.75%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Price</span><span class="lang-zh">价格</span></span><span class="metric-value">$3.2000</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">24h</span><span class="lang-zh">24小时</span></span><span class="metric-value pos">+1.08%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">7d</span><span class="lang-zh">7天</span></span><span class="metric-value pos">+14.40%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">24h Volume</span><span class="lang-zh">24小时成交量</span></span><span class="metric-value">$237.35M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Market Cap</span><span class="lang-zh">流通市值</span></span><span class="metric-value">$2.00B</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">FDV</span><span class="lang-zh">完全稀释估值</span></span><span class="metric-value">$2.87B</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">ATH Distance</span><span class="lang-zh">距历史高点</span></span><span class="metric-value neg">-92.75%</span></div>
   </div>
 
-  <h2>Protocol</h2>
+  <h2><span class="lang-en">Protocol</span><span class="lang-zh">协议</span></h2>
   <div class="metrics">
-    <div class="metric"><span class="metric-label">TVL</span><span class="metric-value">$3.00B</span></div>
-    <div class="metric"><span class="metric-label">TVL 7d</span><span class="metric-value pos">+5.25%</span></div>
-    <div class="metric"><span class="metric-label">Fees 24h</span><span class="metric-value">$1.55M</span></div>
-    <div class="metric"><span class="metric-label">Fees 7d</span><span class="metric-value">$10.46M</span></div>
-    <div class="metric"><span class="metric-label">Revenue 7d</span><span class="metric-value">$906.44K</span></div>
-    <div class="metric"><span class="metric-label">Unichain TVL</span><span class="metric-value">$26.08M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">TVL</span><span class="lang-zh">锁仓总量</span></span><span class="metric-value">$3.00B</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">TVL 7d</span><span class="lang-zh">TVL 7日变化</span></span><span class="metric-value pos">+5.25%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Fees 24h</span><span class="lang-zh">24小时费用</span></span><span class="metric-value">$1.55M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Fees 7d</span><span class="lang-zh">7日费用</span></span><span class="metric-value">$10.46M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Revenue 7d</span><span class="lang-zh">7日协议收入</span></span><span class="metric-value">$906.44K</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Unichain TVL</span><span class="lang-zh">Unichain TVL</span></span><span class="metric-value">$26.08M</span></div>
   </div>
 
-  <h2>Derivatives</h2>
+  <h2><span class="lang-en">Derivatives</span><span class="lang-zh">衍生品</span></h2>
   <div class="metrics">
-    <div class="metric"><span class="metric-label">Open Interest</span><span class="metric-value">n/a</span></div>
-    <div class="metric"><span class="metric-label">Funding Rate</span><span class="metric-value ">n/a</span></div>
-    <div class="metric"><span class="metric-label">Long/Short Ratio</span><span class="metric-value">n/a</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Open Interest</span><span class="lang-zh">未平仓合约</span></span><span class="metric-value">n/a</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Funding Rate</span><span class="lang-zh">资金费率</span></span><span class="metric-value ">n/a</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Long/Short Ratio</span><span class="lang-zh">多空比</span></span><span class="metric-value">n/a</span></div>
   </div>
 
-  <h2>Today's 3 Key Changes</h2>
-  <div class="card"><ol><li>Price +14.4% 7d to $3.20 coinciding with [Temp Check] Activate v4 Protocol Fees going active on Snapshot</li><li>Annualized revenue $47.26M funds only $8.03M buybacks = 2.51M UNI burned vs 20M UNI emitted, leaving net inflation at +1.75%/yr</li><li>At $2.00B market cap on $47.26M annualized revenue, UNI trades ~42x P/S — expensive for a still-dilutive token</li></ol></div>
+  <h2><span class="lang-en">Today's 3 Key Changes</span><span class="lang-zh">今日三大变化</span></h2>
+  <div class="card"><ol><li><span class="lang-en"></span><span class="lang-zh"></span></li><li><span class="lang-en"></span><span class="lang-zh"></span></li><li><span class="lang-en"></span><span class="lang-zh"></span></li></ol></div>
 
-  <h2>Contrarian Observation</h2>
+  <h2><span class="lang-en">Contrarian Observation</span><span class="lang-zh">反向观察</span></h2>
   <div class="card contrarian">
-    <div class="label">Reality Check</div>
-    <p>Price sits 46% below the DAO's own $5.96 treasury-burn implied fair value while v4 fee activation could materially expand the buyback base. A smart long is buying the DAO's admission of underpricing before v4 fees compound with a future real-yield pivot — the asymmetry at $3.20 in the accumulation zone is real.</p>
+    <div class="label"><span class="lang-en">Reality Check</span><span class="lang-zh">警醒视角</span></div>
+    <p><span class="lang-en"></span><span class="lang-zh"></span></p>
   </div>
 
-  <h2>Full Read</h2>
-  <div class="card"><p>UNI's 14% weekly rally is narrative-driven, not fundamentals-driven. Annualized protocol revenue of $47.26M funds an $8M buyback program — 2.51M UNI/year against 20M UNI in fixed emissions. The token remains net inflationary at +1.75% supply growth annually, meaning the burn narrative is currently theatrical. At $3.20, UNI trades ~42x annualized protocol revenue — not cheap for an asset that still dilutes holders. The v4 Protocol Fee Temp Check is the live catalyst, but even a favorable outcome only expands the revenue base; it doesn't fix the emission math unless revenue roughly triples at current price. More critically, the framework-defining variable — the real-yield RFC redirecting buybacks from burn to stakers — is absent from the active governance queue. Recent forum activity is technical (URC-2/3/4 hook standards) and administrative (Cantina bounty dispute), not regime-changing. Without the staking pivot, UNI stays a reflexive PE-multiple asset, and the multiple isn't attractive. Derivatives data is unavailable (Binance 451 geoblock), so positioning read is degraded — confidence held to medium rather than high. The $3-3.5 retail capitulation zone has held, and price sits 46% below the DAO's $5.96 burn-implied fair value. That gap is either opportunity or a signal the DAO overpaid its own treasury. With no live real-yield catalyst and continued dilution, 1-4 week bias is this rally fades toward $2.80-3.00 before the next structural leg.</p></div>
+  <h2><span class="lang-en">Full Read</span><span class="lang-zh">完整解读</span></h2>
+  <div class="card"><p><span class="lang-en"></span><span class="lang-zh"></span></p></div>
 
-  <h2>Watch Next</h2>
-  <div class="card"><ul><li>v4 Protocol Fee Temp Check vote outcome and modeled revenue uplift (does it 2-3x current $47M annualized?)</li><li>Any real-yield RFC surfacing on gov.uniswap.org — currently absent from active queue, which is the actual regime-change variable</li><li>Reclaim and hold of $4 (lower bound of $4-7 institutional accumulation zone) to confirm the rally is more than a short squeeze</li></ul></div>
+  <h2><span class="lang-en">Watch Next</span><span class="lang-zh">接下来关注</span></h2>
+  <div class="card"><ul><li><span class="lang-en"></span><span class="lang-zh"></span></li><li><span class="lang-en"></span><span class="lang-zh"></span></li><li><span class="lang-en"></span><span class="lang-zh"></span></li></ul></div>
 
-  <h2>Active Governance</h2>
+  <h2><span class="lang-en">Active Governance</span><span class="lang-zh">进行中的治理</span></h2>
   <div class="card">
     <ul><li><a href="https://snapshot.box/#/s:uniswapgovernance.eth/proposal/0x3fda3c04fa106ad45173011ef4dfa5db2f14cd35c3c3a7a40f067a44cbadd5f4" target="_blank">[Temp Check] Activate v4 Protocol Fees</a> <span class="badge-info">[active]</span></li></ul>
   </div>
 
   <div class="footer">
-    Data: CoinGecko · DeFiLlama · Ethereum RPC · Binance · Snapshot.
-    AI synthesis: <code>claude-opus-4-7</code> with adaptive thinking + prompt caching.
-    <br>Timestamp: 2026-07-08T08:31:36.233Z
-    <div class="error-note">6 data source(s) failed this run: binance:ticker: Request failed with status code 451 · binance:klines: Request failed with status code 451 · binance:premium: Request failed with status code 451 · binance:longshort: Request failed with status code 451 · binance:oi: Request failed with status code 451 · onchain: totalSupply read failed</div>
+    <span class="lang-en">Data: CoinGecko · DeFiLlama · Ethereum RPC · Bybit · Snapshot.</span><span class="lang-zh">数据源: CoinGecko · DeFiLlama · 以太坊 RPC · Bybit · Snapshot.</span><br>
+    <span class="lang-en">AI synthesis: &lt;code&gt;claude-opus-4-7&lt;/code&gt; with adaptive thinking + prompt caching.</span><span class="lang-zh">AI 合成: &lt;code&gt;claude-opus-4-7&lt;/code&gt; 自适应思考 + prompt caching.</span><br>
+    <span class="lang-en">Timestamp</span><span class="lang-zh">时间戳</span>: 2026-07-08T08:31:36.233Z
+    <div class="error-note">6 fetcher warning(s): binance:ticker: Request failed with status code 451 · binance:klines: Request failed with status code 451 · binance:premium: Request failed with status code 451 · binance:longshort: Request failed with status code 451 · binance:oi: Request failed with status code 451 · onchain: totalSupply read failed</div>
   </div>
 </div>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    var cur = document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+    var next = cur === 'zh' ? 'en' : 'zh';
+    document.documentElement.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next === 'zh' ? 'zh-CN' : 'en');
+    try { localStorage.setItem('uniMonitorLang', next); } catch(e){}
+  });
+</script>
 </body>
 </html>

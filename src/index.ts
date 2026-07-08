@@ -52,7 +52,7 @@ async function main() {
   }
 
   if (args.send && !args.dryRun) {
-    const subject = `UNI Brief ${snapshot.dateISO} — ${analysis.stance.toUpperCase()} · ${analysis.headline.slice(0, 60)}`;
+    const subject = `UNI Brief ${snapshot.dateISO} — ${analysis.stance.toUpperCase()} · ${analysis.headline.en.slice(0, 60)}`;
     await Promise.all([
       sendEmail(subject, html, plain).catch((e) =>
         console.error('[email] failed:', e.message)

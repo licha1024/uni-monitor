@@ -59,12 +59,17 @@ export interface UniSnapshot {
   errors: string[];
 }
 
+export interface Bilingual {
+  en: string;
+  zh: string;
+}
+
 export interface DailyAnalysis {
-  headline: string;
+  headline: Bilingual;
   stance: 'bullish' | 'neutral' | 'bearish';
   confidence: 'low' | 'medium' | 'high';
-  keyChanges: string[];
-  contrarianObservation: string;
-  watchNext: string[];
-  fullReasoning: string;
+  keyChanges: Bilingual[];
+  contrarianObservation: Bilingual;
+  watchNext: Bilingual[];
+  fullReasoning: Bilingual;
 }

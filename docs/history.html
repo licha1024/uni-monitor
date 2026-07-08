@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,36 @@ body {
   line-height: 1.6;
   min-height: 100vh;
 }
+/* Language switching: hide the inactive language */
+html[data-lang="zh"] .lang-en { display: none; }
+html[data-lang="en"] .lang-zh { display: none; }
+/* Default before JS runs: show Chinese (Chinese is the site's default) */
+.lang-en { display: none; }
+html[data-lang="en"] .lang-en { display: inline; }
+html[data-lang="en"] .lang-zh { display: none; }
+
 .container { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
 header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px; }
-header .title { display: flex; align-items: baseline; gap: 12px; }
+header .title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+header .title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 header h1 { font-size: 28px; letter-spacing: -0.5px; }
 header .subtitle { color: var(--text-dim); font-size: 14px; }
 header .nav { margin-top: 12px; display: flex; gap: 20px; font-size: 14px; }
 header .nav a { color: var(--accent); text-decoration: none; }
 header .nav a:hover { text-decoration: underline; }
+.lang-toggle {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 48px;
+  transition: all 0.15s;
+}
+.lang-toggle:hover { background: var(--panel-2); border-color: var(--accent); color: var(--accent); }
 .stance-pill {
   display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.5px;
@@ -71,41 +93,64 @@ a { color: var(--accent); }
 .badge-info { color: var(--text-dim); font-size: 12px; }
 code { background: var(--panel-2); padding: 2px 6px; border-radius: 3px; font-size: 13px; }
 </style>
+<script>
+  (function() {
+    try {
+      var lang = localStorage.getItem('uniMonitorLang') || 'zh';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+    } catch (e) {
+      document.documentElement.setAttribute('data-lang', 'zh');
+    }
+  })();
+</script>
 </head>
 <body>
 <div class="container">
   
 <header>
-  <div class="title">
-    <h1>UNI Monitor</h1>
-    <span class="subtitle">Daily archive</span>
+  <div class="title-row">
+    <div class="title">
+      <h1>UNI Monitor</h1>
+      <span class="subtitle"><span class="lang-en">Daily archive</span><span class="lang-zh">每日归档</span></span>
+    </div>
+    <button id="lang-toggle" class="lang-toggle" title="Switch language / 切换语言">
+      <span class="lang-en">中</span><span class="lang-zh">EN</span>
+    </button>
   </div>
   <nav class="nav">
-    <a href="index.html">Latest</a>
-    <a href="history.html">History</a>
-    <a href="https://github.com/licha1024/uni-monitor" target="_blank">GitHub</a>
+    <a href="index.html"><span class="lang-en">Latest</span><span class="lang-zh">最新</span></a>
+    <a href="history.html"><span class="lang-en">History</span><span class="lang-zh">历史</span></a>
+    <a href="https://github.com/licha1024/uni-monitor" target="_blank"><span class="lang-en">GitHub</span><span class="lang-zh">GitHub</span></a>
   </nav>
 </header>
 
 
-  <h2>All reports (1)</h2>
+  <h2><span class="lang-en">All reports</span><span class="lang-zh">所有报告</span> (1)</h2>
   <div class="history-list">
     
     <a href="history/2026-07-08.html" style="text-decoration:none">
       <div class="history-item">
         <div>
-          <div class="history-date">2026-07-08 <span class="stance-pill stance-bearish" style="margin-left:8px;font-size:10px;padding:2px 8px">bearish</span></div>
-          <div class="history-headline">UNI's 14% weekly bounce is narrative fuel from the v4 fee temp check, but the burn math is still net inflationary and the real-yield catalyst is absent.</div>
+          <div class="history-date">2026-07-08 <span class="stance-pill stance-bearish" style="margin-left:8px;font-size:10px;padding:2px 8px"><span class="lang-en">BEARISH</span><span class="lang-zh">看空</span></span></div>
+          <div class="history-headline"><span class="lang-en"></span><span class="lang-zh"></span></div>
         </div>
         <div class="badge-info">$3.2000</div>
       </div>
     </a>
   </div>
 
-  <div class="footer">
-    Reports are generated daily by GitHub Actions. Data snapshots (raw JSON) are archived in
-    <a href="https://github.com/licha1024/uni-monitor/tree/main/data/snapshots" target="_blank">/data/snapshots</a>.
-  </div>
+  <div class="footer"><span class="lang-en">Reports are generated daily by GitHub Actions. Raw JSON in /data/snapshots.</span><span class="lang-zh">报告由 GitHub Actions 每日自动生成。原始 JSON 在 /data/snapshots。</span></div>
 </div>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    var cur = document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+    var next = cur === 'zh' ? 'en' : 'zh';
+    document.documentElement.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next === 'zh' ? 'zh-CN' : 'en');
+    try { localStorage.setItem('uniMonitorLang', next); } catch(e){}
+  });
+</script>
 </body>
 </html>

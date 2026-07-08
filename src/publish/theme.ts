@@ -20,14 +20,36 @@ body {
   line-height: 1.6;
   min-height: 100vh;
 }
+/* Language switching: hide the inactive language */
+html[data-lang="zh"] .lang-en { display: none; }
+html[data-lang="en"] .lang-zh { display: none; }
+/* Default before JS runs: show Chinese (Chinese is the site's default) */
+.lang-en { display: none; }
+html[data-lang="en"] .lang-en { display: inline; }
+html[data-lang="en"] .lang-zh { display: none; }
+
 .container { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
 header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px; }
-header .title { display: flex; align-items: baseline; gap: 12px; }
+header .title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+header .title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 header h1 { font-size: 28px; letter-spacing: -0.5px; }
 header .subtitle { color: var(--text-dim); font-size: 14px; }
 header .nav { margin-top: 12px; display: flex; gap: 20px; font-size: 14px; }
 header .nav a { color: var(--accent); text-decoration: none; }
 header .nav a:hover { text-decoration: underline; }
+.lang-toggle {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 48px;
+  transition: all 0.15s;
+}
+.lang-toggle:hover { background: var(--panel-2); border-color: var(--accent); color: var(--accent); }
 .stance-pill {
   display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.5px;

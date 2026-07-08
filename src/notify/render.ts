@@ -32,7 +32,7 @@ export function renderPlain(snap: UniSnapshot, a: DailyAnalysis): string {
   return `📊 UNI Daily Brief — ${snap.dateISO}
 
 ${stanceEmoji[a.stance]} ${a.stance.toUpperCase()} (${a.confidence} confidence)
-${a.headline}
+${a.headline.en}
 
 ━━━ MARKET ━━━
 Price: $${num(price, 4)}  (${pctSigned(snap.market.priceChange24hPct)} 24h, ${pctSigned(snap.market.priceChange7dPct)} 7d)
@@ -42,16 +42,16 @@ Protocol rev 7d: ${usd(snap.protocol.revenue7dUsd)}
 Funding: ${pctSigned(snap.derivatives.fundingRatePct)}   OI: ${usd(snap.derivatives.openInterestUsd)}
 
 ━━━ TODAY'S 3 KEY CHANGES ━━━
-${a.keyChanges.map((k, i) => `${i + 1}. ${k}`).join('\n')}
+${a.keyChanges.map((k, i) => `${i + 1}. ${k.en}`).join('\n')}
 
 ━━━ CONTRARIAN OBSERVATION ━━━
-${a.contrarianObservation}
+${a.contrarianObservation.en}
 
 ━━━ FULL READ ━━━
-${a.fullReasoning}
+${a.fullReasoning.en}
 
 ━━━ WATCH NEXT ━━━
-${a.watchNext.map((w, i) => `• ${w}`).join('\n')}
+${a.watchNext.map((w) => `• ${w.en}`).join('\n')}
 
 ${snap.errors.length > 0 ? `\n⚠️ Data errors: ${snap.errors.length}\n` + snap.errors.map((e) => `  - ${e}`).join('\n') : ''}
 `;
@@ -86,7 +86,7 @@ export function renderHtml(snap: UniSnapshot, a: DailyAnalysis): string {
 <body>
   <h1>UNI Daily Brief — ${snap.dateISO}</h1>
   <span class="stance">${a.stance.toUpperCase()} · ${a.confidence} confidence</span>
-  <p class="headline">${a.headline}</p>
+  <p class="headline">${escapeHtml(a.headline.en)}</p>
 
   <h2>Market</h2>
   <div class="metrics">
@@ -103,18 +103,18 @@ export function renderHtml(snap: UniSnapshot, a: DailyAnalysis): string {
   </div>
 
   <h2>Today's 3 Key Changes</h2>
-  <ol>${a.keyChanges.map((k) => `<li>${escapeHtml(k)}</li>`).join('')}</ol>
+  <ol>${a.keyChanges.map((k) => `<li>${escapeHtml(k.en)}</li>`).join('')}</ol>
 
   <div class="contrarian">
     <strong>Contrarian Observation</strong><br>
-    ${escapeHtml(a.contrarianObservation)}
+    ${escapeHtml(a.contrarianObservation.en)}
   </div>
 
   <h2>Full Read</h2>
-  <p>${escapeHtml(a.fullReasoning)}</p>
+  <p>${escapeHtml(a.fullReasoning.en)}</p>
 
   <h2>Watch Next</h2>
-  <ul>${a.watchNext.map((w) => `<li>${escapeHtml(w)}</li>`).join('')}</ul>
+  <ul>${a.watchNext.map((w) => `<li>${escapeHtml(w.en)}</li>`).join('')}</ul>
 
   ${
     snap.governance.activeProposals.length > 0

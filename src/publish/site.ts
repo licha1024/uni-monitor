@@ -1,6 +1,7 @@
-import type { UniSnapshot, DailyAnalysis } from '../types/snapshot.js';
+import type { UniSnapshot, DailyAnalysis, Bilingual } from '../types/snapshot.js';
 import { SITE_CSS } from './theme.js';
 
+// ---------- formatters ----------
 function num(n: number | null | undefined, digits = 2): string {
   if (n == null || !isFinite(n)) return 'n/a';
   return n.toFixed(digits);
@@ -32,158 +33,267 @@ function pctClass(n: number | null | undefined): string {
   return n > 0 ? 'pos' : n < 0 ? 'neg' : '';
 }
 
-export interface HistoryEntry {
-  dateISO: string;
-  filename: string;
-  headline: string;
-  stance: DailyAnalysis['stance'];
-  price: number | null;
+// Render a bilingual field as two spans; CSS shows only the active language
+function bi(b: Bilingual | undefined | null): string {
+  if (!b) return '';
+  return `<span class="lang-en">${esc(b.en || b.zh || '')}</span><span class="lang-zh">${esc(b.zh || b.en || '')}</span>`;
 }
 
-const HEADER = (subtitle: string, showBackLink: boolean) => `
+// UI label bilingual pairs
+const T = {
+  latest: { en: 'Latest', zh: '最新' },
+  history: { en: 'History', zh: '历史' },
+  github: { en: 'GitHub', zh: 'GitHub' },
+  reportFor: { en: 'Report for', zh: '报告日期' },
+  confidence: { en: 'confidence', zh: '置信度' },
+  market: { en: 'Market', zh: '市场' },
+  protocol: { en: 'Protocol', zh: '协议' },
+  derivatives: { en: 'Derivatives', zh: '衍生品' },
+  keyChanges: { en: "Today's 3 Key Changes", zh: '今日三大变化' },
+  contrarian: { en: 'Contrarian Observation', zh: '反向观察' },
+  contrarianLabel: { en: 'Reality Check', zh: '警醒视角' },
+  fullRead: { en: 'Full Read', zh: '完整解读' },
+  watchNext: { en: 'Watch Next', zh: '接下来关注' },
+  governance: { en: 'Active Governance', zh: '进行中的治理' },
+  price: { en: 'Price', zh: '价格' },
+  '24h': { en: '24h', zh: '24小时' },
+  '7d': { en: '7d', zh: '7天' },
+  volume24h: { en: '24h Volume', zh: '24小时成交量' },
+  marketCap: { en: 'Market Cap', zh: '流通市值' },
+  fdv: { en: 'FDV', zh: '完全稀释估值' },
+  athDist: { en: 'ATH Distance', zh: '距历史高点' },
+  tvl: { en: 'TVL', zh: '锁仓总量' },
+  tvl7d: { en: 'TVL 7d', zh: 'TVL 7日变化' },
+  fees24h: { en: 'Fees 24h', zh: '24小时费用' },
+  fees7d: { en: 'Fees 7d', zh: '7日费用' },
+  revenue7d: { en: 'Revenue 7d', zh: '7日协议收入' },
+  unichainTvl: { en: 'Unichain TVL', zh: 'Unichain TVL' },
+  openInterest: { en: 'Open Interest', zh: '未平仓合约' },
+  fundingRate: { en: 'Funding Rate', zh: '资金费率' },
+  longShort: { en: 'Long/Short Ratio', zh: '多空比' },
+  footer1: {
+    en: 'Data: CoinGecko · DeFiLlama · Ethereum RPC · Bybit · Snapshot.',
+    zh: '数据源: CoinGecko · DeFiLlama · 以太坊 RPC · Bybit · Snapshot.',
+  },
+  footer2: {
+    en: 'AI synthesis: <code>claude-opus-4-7</code> with adaptive thinking + prompt caching.',
+    zh: 'AI 合成: <code>claude-opus-4-7</code> 自适应思考 + prompt caching.',
+  },
+  timestamp: { en: 'Timestamp', zh: '时间戳' },
+  langBtnZh: { en: 'EN', zh: '中' }, // shown on the button (opposite of current)
+  historyTitle: { en: 'Daily archive', zh: '每日归档' },
+  allReports: { en: 'All reports', zh: '所有报告' },
+  noReports: { en: 'No reports yet. First run pending.', zh: '暂无报告，等待首次运行。' },
+  archiveFooter: {
+    en: 'Reports are generated daily by GitHub Actions. Raw JSON in /data/snapshots.',
+    zh: '报告由 GitHub Actions 每日自动生成。原始 JSON 在 /data/snapshots。',
+  },
+  stanceBullish: { en: 'BULLISH', zh: '看多' },
+  stanceBearish: { en: 'BEARISH', zh: '看空' },
+  stanceNeutral: { en: 'NEUTRAL', zh: '中性' },
+  confLow: { en: 'low', zh: '低' },
+  confMedium: { en: 'medium', zh: '中' },
+  confHigh: { en: 'high', zh: '高' },
+} as const;
+
+const t = (key: keyof typeof T): string => bi(T[key]);
+
+// Head section shared by all pages. The inline script runs before render:
+// it reads localStorage (default 'zh') and sets <html data-lang> so CSS applies
+// the correct language before first paint (no flash).
+function head(title: string): string {
+  return `<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<style>${SITE_CSS}</style>
+<script>
+  (function() {
+    try {
+      var lang = localStorage.getItem('uniMonitorLang') || 'zh';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+    } catch (e) {
+      document.documentElement.setAttribute('data-lang', 'zh');
+    }
+  })();
+</script>
+</head>`;
+}
+
+function langToggleScript(): string {
+  return `
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    var cur = document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+    var next = cur === 'zh' ? 'en' : 'zh';
+    document.documentElement.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next === 'zh' ? 'zh-CN' : 'en');
+    try { localStorage.setItem('uniMonitorLang', next); } catch(e){}
+  });
+</script>`;
+}
+
+function header(subtitle: Bilingual, showBackLink: boolean): string {
+  const prefix = showBackLink ? '../' : '';
+  return `
 <header>
-  <div class="title">
-    <h1>UNI Monitor</h1>
-    <span class="subtitle">${subtitle}</span>
+  <div class="title-row">
+    <div class="title">
+      <h1>UNI Monitor</h1>
+      <span class="subtitle">${bi(subtitle)}</span>
+    </div>
+    <button id="lang-toggle" class="lang-toggle" title="Switch language / 切换语言">
+      <span class="lang-en">中</span><span class="lang-zh">EN</span>
+    </button>
   </div>
   <nav class="nav">
-    <a href="${showBackLink ? '../index.html' : 'index.html'}">Latest</a>
-    <a href="${showBackLink ? '../history.html' : 'history.html'}">History</a>
-    <a href="https://github.com/licha1024/uni-monitor" target="_blank">GitHub</a>
+    <a href="${prefix}index.html">${t('latest')}</a>
+    <a href="${prefix}history.html">${t('history')}</a>
+    <a href="https://github.com/licha1024/uni-monitor" target="_blank">${t('github')}</a>
   </nav>
 </header>
 `;
+}
+
+const stanceLabel = (s: DailyAnalysis['stance']): string =>
+  s === 'bullish' ? t('stanceBullish') : s === 'bearish' ? t('stanceBearish') : t('stanceNeutral');
+
+const confLabel = (c: DailyAnalysis['confidence']): string =>
+  c === 'low' ? t('confLow') : c === 'high' ? t('confHigh') : t('confMedium');
+
+export interface HistoryEntry {
+  dateISO: string;
+  filename: string;
+  headline: Bilingual;
+  stance: DailyAnalysis['stance'];
+  price: number | null;
+}
 
 export function renderReportPage(
   snap: UniSnapshot,
   a: DailyAnalysis,
   isHistorical = false
 ): string {
-  const stanceClass = `stance-${a.stance}`;
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UNI Brief ${snap.dateISO} — ${a.stance.toUpperCase()}</title>
-<style>${SITE_CSS}</style>
-</head>
+  const stanceCls = `stance-${a.stance}`;
+  const title = `UNI Brief ${snap.dateISO} — ${a.stance.toUpperCase()}`;
+  const subtitle: Bilingual = {
+    en: `Report for ${snap.dateISO}`,
+    zh: `${snap.dateISO} 报告`,
+  };
+
+  return `${head(title)}
 <body>
 <div class="container">
-  ${HEADER(`Report for ${snap.dateISO}`, isHistorical)}
+  ${header(subtitle, isHistorical)}
 
-  <span class="stance-pill ${stanceClass}">${a.stance} · ${a.confidence} confidence</span>
-  <p class="headline">${esc(a.headline)}</p>
+  <span class="stance-pill ${stanceCls}">${stanceLabel(a.stance)} · ${confLabel(a.confidence)} ${t('confidence')}</span>
+  <p class="headline">${bi(a.headline)}</p>
 
-  <h2>Market</h2>
+  <h2>${t('market')}</h2>
   <div class="metrics">
-    <div class="metric"><span class="metric-label">Price</span><span class="metric-value">$${num(snap.market.priceUsd, 4)}</span></div>
-    <div class="metric"><span class="metric-label">24h</span><span class="metric-value ${pctClass(snap.market.priceChange24hPct)}">${pctSigned(snap.market.priceChange24hPct)}</span></div>
-    <div class="metric"><span class="metric-label">7d</span><span class="metric-value ${pctClass(snap.market.priceChange7dPct)}">${pctSigned(snap.market.priceChange7dPct)}</span></div>
-    <div class="metric"><span class="metric-label">24h Volume</span><span class="metric-value">${usd(snap.market.volume24hUsd)}</span></div>
-    <div class="metric"><span class="metric-label">Market Cap</span><span class="metric-value">${usd(snap.market.marketCapUsd)}</span></div>
-    <div class="metric"><span class="metric-label">FDV</span><span class="metric-value">${usd(snap.market.fdvUsd)}</span></div>
-    <div class="metric"><span class="metric-label">ATH Distance</span><span class="metric-value neg">${pctSigned(snap.market.athChangePct)}</span></div>
+    <div class="metric"><span class="metric-label">${t('price')}</span><span class="metric-value">$${num(snap.market.priceUsd, 4)}</span></div>
+    <div class="metric"><span class="metric-label">${t('24h')}</span><span class="metric-value ${pctClass(snap.market.priceChange24hPct)}">${pctSigned(snap.market.priceChange24hPct)}</span></div>
+    <div class="metric"><span class="metric-label">${t('7d')}</span><span class="metric-value ${pctClass(snap.market.priceChange7dPct)}">${pctSigned(snap.market.priceChange7dPct)}</span></div>
+    <div class="metric"><span class="metric-label">${t('volume24h')}</span><span class="metric-value">${usd(snap.market.volume24hUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('marketCap')}</span><span class="metric-value">${usd(snap.market.marketCapUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('fdv')}</span><span class="metric-value">${usd(snap.market.fdvUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('athDist')}</span><span class="metric-value neg">${pctSigned(snap.market.athChangePct)}</span></div>
   </div>
 
-  <h2>Protocol</h2>
+  <h2>${t('protocol')}</h2>
   <div class="metrics">
-    <div class="metric"><span class="metric-label">TVL</span><span class="metric-value">${usd(snap.protocol.tvlUsd)}</span></div>
-    <div class="metric"><span class="metric-label">TVL 7d</span><span class="metric-value ${pctClass(snap.protocol.tvlChange7dPct)}">${pctSigned(snap.protocol.tvlChange7dPct)}</span></div>
-    <div class="metric"><span class="metric-label">Fees 24h</span><span class="metric-value">${usd(snap.protocol.fees24hUsd)}</span></div>
-    <div class="metric"><span class="metric-label">Fees 7d</span><span class="metric-value">${usd(snap.protocol.fees7dUsd)}</span></div>
-    <div class="metric"><span class="metric-label">Revenue 7d</span><span class="metric-value">${usd(snap.protocol.revenue7dUsd)}</span></div>
-    <div class="metric"><span class="metric-label">Unichain TVL</span><span class="metric-value">${usd(snap.protocol.unichainTvlUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('tvl')}</span><span class="metric-value">${usd(snap.protocol.tvlUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('tvl7d')}</span><span class="metric-value ${pctClass(snap.protocol.tvlChange7dPct)}">${pctSigned(snap.protocol.tvlChange7dPct)}</span></div>
+    <div class="metric"><span class="metric-label">${t('fees24h')}</span><span class="metric-value">${usd(snap.protocol.fees24hUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('fees7d')}</span><span class="metric-value">${usd(snap.protocol.fees7dUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('revenue7d')}</span><span class="metric-value">${usd(snap.protocol.revenue7dUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('unichainTvl')}</span><span class="metric-value">${usd(snap.protocol.unichainTvlUsd)}</span></div>
   </div>
 
-  <h2>Derivatives</h2>
+  <h2>${t('derivatives')}</h2>
   <div class="metrics">
-    <div class="metric"><span class="metric-label">Open Interest</span><span class="metric-value">${usd(snap.derivatives.openInterestUsd)}</span></div>
-    <div class="metric"><span class="metric-label">Funding Rate</span><span class="metric-value ${pctClass(snap.derivatives.fundingRatePct)}">${pctSigned(snap.derivatives.fundingRatePct)}</span></div>
-    <div class="metric"><span class="metric-label">Long/Short Ratio</span><span class="metric-value">${snap.derivatives.longShortRatio?.toFixed(3) ?? 'n/a'}</span></div>
+    <div class="metric"><span class="metric-label">${t('openInterest')}</span><span class="metric-value">${usd(snap.derivatives.openInterestUsd)}</span></div>
+    <div class="metric"><span class="metric-label">${t('fundingRate')}</span><span class="metric-value ${pctClass(snap.derivatives.fundingRatePct)}">${pctSigned(snap.derivatives.fundingRatePct)}</span></div>
+    <div class="metric"><span class="metric-label">${t('longShort')}</span><span class="metric-value">${snap.derivatives.longShortRatio?.toFixed(3) ?? 'n/a'}</span></div>
   </div>
 
-  <h2>Today's 3 Key Changes</h2>
-  <div class="card"><ol>${a.keyChanges.map((k) => `<li>${esc(k)}</li>`).join('')}</ol></div>
+  <h2>${t('keyChanges')}</h2>
+  <div class="card"><ol>${a.keyChanges.map((k) => `<li>${bi(k)}</li>`).join('')}</ol></div>
 
-  <h2>Contrarian Observation</h2>
+  <h2>${t('contrarian')}</h2>
   <div class="card contrarian">
-    <div class="label">Reality Check</div>
-    <p>${esc(a.contrarianObservation)}</p>
+    <div class="label">${t('contrarianLabel')}</div>
+    <p>${bi(a.contrarianObservation)}</p>
   </div>
 
-  <h2>Full Read</h2>
-  <div class="card"><p>${esc(a.fullReasoning)}</p></div>
+  <h2>${t('fullRead')}</h2>
+  <div class="card"><p>${bi(a.fullReasoning)}</p></div>
 
-  <h2>Watch Next</h2>
-  <div class="card"><ul>${a.watchNext.map((w) => `<li>${esc(w)}</li>`).join('')}</ul></div>
+  <h2>${t('watchNext')}</h2>
+  <div class="card"><ul>${a.watchNext.map((w) => `<li>${bi(w)}</li>`).join('')}</ul></div>
 
   ${
     snap.governance.activeProposals.length > 0
-      ? `<h2>Active Governance</h2>
+      ? `<h2>${t('governance')}</h2>
   <div class="card">
     <ul>${snap.governance.activeProposals
-      .map((p) => `<li><a href="${esc(p.url)}" target="_blank">${esc(p.title)}</a> <span class="badge-info">[${p.status}]</span></li>`)
+      .map((p) => `<li><a href="${esc(p.url)}" target="_blank">${esc(p.title)}</a> <span class="badge-info">[${esc(p.status)}]</span></li>`)
       .join('')}</ul>
   </div>`
       : ''
   }
 
   <div class="footer">
-    Data: CoinGecko · DeFiLlama · Ethereum RPC · Binance · Snapshot.
-    AI synthesis: <code>claude-opus-4-7</code> with adaptive thinking + prompt caching.
-    <br>Timestamp: ${snap.timestamp}
+    ${t('footer1')}<br>
+    ${t('footer2')}<br>
+    ${t('timestamp')}: ${snap.timestamp}
     ${
       snap.errors.length > 0
-        ? `<div class="error-note">${snap.errors.length} data source(s) failed this run: ${snap.errors.map((e) => esc(e)).join(' · ')}</div>`
+        ? `<div class="error-note">${snap.errors.length} fetcher warning(s): ${esc(snap.errors.join(' · '))}</div>`
         : ''
     }
   </div>
 </div>
+${langToggleScript()}
 </body>
 </html>`;
 }
 
 export function renderHistoryPage(entries: HistoryEntry[]): string {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UNI Monitor — History</title>
-<style>${SITE_CSS}</style>
-</head>
-<body>
-<div class="container">
-  ${HEADER('Daily archive', false)}
-
-  <h2>All reports (${entries.length})</h2>
-  <div class="history-list">
-    ${
-      entries.length === 0
-        ? '<p style="color:var(--text-dim)">No reports yet. First run pending.</p>'
-        : entries
-            .map(
-              (e) => `
+  const rows =
+    entries.length === 0
+      ? `<p style="color:var(--text-dim)">${t('noReports')}</p>`
+      : entries
+          .map(
+            (e) => `
     <a href="history/${esc(e.filename)}" style="text-decoration:none">
       <div class="history-item">
         <div>
-          <div class="history-date">${e.dateISO} <span class="stance-pill stance-${e.stance}" style="margin-left:8px;font-size:10px;padding:2px 8px">${e.stance}</span></div>
-          <div class="history-headline">${esc(e.headline)}</div>
+          <div class="history-date">${e.dateISO} <span class="stance-pill stance-${e.stance}" style="margin-left:8px;font-size:10px;padding:2px 8px">${stanceLabel(e.stance)}</span></div>
+          <div class="history-headline">${bi(e.headline)}</div>
         </div>
         <div class="badge-info">$${num(e.price, 4)}</div>
       </div>
     </a>`
-            )
-            .join('')
-    }
+          )
+          .join('');
+
+  return `${head('UNI Monitor — History')}
+<body>
+<div class="container">
+  ${header(T.historyTitle, false)}
+
+  <h2>${t('allReports')} (${entries.length})</h2>
+  <div class="history-list">
+    ${rows}
   </div>
 
-  <div class="footer">
-    Reports are generated daily by GitHub Actions. Data snapshots (raw JSON) are archived in
-    <a href="https://github.com/licha1024/uni-monitor/tree/main/data/snapshots" target="_blank">/data/snapshots</a>.
-  </div>
+  <div class="footer">${t('archiveFooter')}</div>
 </div>
+${langToggleScript()}
 </body>
 </html>`;
 }

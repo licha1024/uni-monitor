@@ -9,10 +9,14 @@ const client = new Anthropic({
   ...(config.anthropicBaseUrl ? { baseURL: config.anthropicBaseUrl } : {}),
 });
 
+import type { Bilingual } from '../types/snapshot.js';
+
 /**
- * Normalize alternative field names to the canonical DailyAnalysis shape.
- * Different providers/proxies sometimes let the model use variant schemas —
- * we accept snake_case and a few common aliases.
+ * Normalize AI output to canonical bilingual DailyAnalysis.
+ * Accepts:
+ *  - New bilingual shape: { headline: { en, zh }, ... }
+ *  - Old English-only shape (auto-copies en to zh so old snapshots render)
+ *  - snake_case aliases (proxies vary)
  */
 function normalize(raw: Record<string, unknown>): DailyAnalysis {
   const pick = (...keys: string[]): unknown => {
@@ -22,61 +26,71 @@ function normalize(raw: Record<string, unknown>): DailyAnalysis {
     return undefined;
   };
 
-  const asArray = (v: unknown): string[] => {
-    if (Array.isArray(v)) return v.map((x) => String(x));
-    if (typeof v === 'string') return [v];
-    if (v && typeof v === 'object') return Object.values(v).map((x) => String(x));
-    return [];
-  };
-
   const asString = (v: unknown, fallback = ''): string => {
     if (typeof v === 'string') return v;
     if (v == null) return fallback;
     return typeof v === 'object' ? JSON.stringify(v) : String(v);
   };
 
+  // Coerce anything into a Bilingual { en, zh }
+  const asBilingual = (v: unknown, fallback = ''): Bilingual => {
+    if (v && typeof v === 'object' && !Array.isArray(v)) {
+      const o = v as Record<string, unknown>;
+      const en = asString(o.en ?? o.EN ?? o.english);
+      const zh = asString(o.zh ?? o.ZH ?? o.chinese ?? o['zh-CN']);
+      if (en || zh) return { en: en || zh, zh: zh || en };
+    }
+    // legacy: plain string — same text both languages
+    const s = asString(v, fallback);
+    return { en: s, zh: s };
+  };
+
+  const asBilingualArray = (v: unknown): Bilingual[] => {
+    if (!Array.isArray(v)) {
+      if (typeof v === 'string' && v) return [asBilingual(v)];
+      return [];
+    }
+    return v.map((item) => asBilingual(item));
+  };
+
   const stance = asString(pick('stance'), 'neutral').toLowerCase();
   const confidence = asString(pick('confidence'), 'low').toLowerCase();
 
-  const keyChanges = asArray(pick('keyChanges', 'key_changes', 'key_metrics', 'keyMetrics'));
-  const watchNext = asArray(pick('watchNext', 'watch_next', 'catalysts_bullish', 'catalystsBullish'));
-
-  // Build fullReasoning from whatever prose fields exist
-  const reasoningParts = [
-    asString(pick('fullReasoning', 'full_reasoning', 'reasoning')),
-    asString(pick('action_bias', 'actionBias')),
-    asString(pick('data_quality_note', 'dataQualityNote')),
-  ].filter(Boolean);
-
   return {
-    headline: asString(pick('headline'), '(no headline)'),
+    headline: asBilingual(pick('headline'), '(no headline)'),
     stance: (['bullish', 'bearish', 'neutral'].includes(stance) ? stance : 'neutral') as DailyAnalysis['stance'],
     confidence: (['low', 'medium', 'high'].includes(confidence) ? confidence : 'low') as DailyAnalysis['confidence'],
-    keyChanges: keyChanges.slice(0, 3),
-    contrarianObservation: asString(pick('contrarianObservation', 'contrarian_observation'), ''),
-    watchNext: watchNext.slice(0, 3),
-    fullReasoning: reasoningParts.join('\n\n'),
+    keyChanges: asBilingualArray(pick('keyChanges', 'key_changes')).slice(0, 3),
+    contrarianObservation: asBilingual(pick('contrarianObservation', 'contrarian_observation'), ''),
+    watchNext: asBilingualArray(pick('watchNext', 'watch_next')).slice(0, 3),
+    fullReasoning: asBilingual(pick('fullReasoning', 'full_reasoning', 'reasoning'), ''),
   };
 }
 
 export async function synthesize(snapshot: UniSnapshot): Promise<DailyAnalysis> {
   const rendered = renderSnapshotForAI(snapshot);
 
-  const userMessage = `Today's UNI data snapshot follows. Analyze it, then output ONLY a JSON object (no prose, no markdown code fences) matching this exact schema:
+  const userMessage = `Today's UNI data snapshot follows. Analyze it, then output ONLY a JSON object (no prose, no markdown code fences).
+
+Every prose field must be BILINGUAL: an object { "en": "...", "zh": "..." }. The Chinese version must be a proper native translation (专业中文, 术语准确, 不是逐字翻译). Numbers, tickers, and protocol names stay in original form.
+
+Schema:
 
 {
-  "headline": string,                 // one-sentence takeaway, max 30 words
-  "stance": "bullish" | "neutral" | "bearish",
-  "confidence": "low" | "medium" | "high",
-  "keyChanges": string[],             // exactly 3, concrete with numbers
-  "contrarianObservation": string,    // MUST cut against your headline stance
-  "watchNext": string[],              // 2-3 items
-  "fullReasoning": string             // tight paragraph 150-250 words
+  "headline":              { "en": string, "zh": string },        // one sentence, max 30 words / 40 汉字
+  "stance":                "bullish" | "neutral" | "bearish",
+  "confidence":            "low" | "medium" | "high",
+  "keyChanges":            [ { "en": string, "zh": string }, ... ],   // exactly 3, concrete with numbers
+  "contrarianObservation": { "en": string, "zh": string },        // MUST cut against your headline stance
+  "watchNext":             [ { "en": string, "zh": string }, ... ],   // 2-3 items
+  "fullReasoning":         { "en": string, "zh": string }         // tight paragraph, 150-250 en words / 300-500 汉字
 }
 
 ${rendered}
 
 Reminder: your contrarian observation must genuinely cut against your headline stance. If you say bullish, find the specific reason someone smart could be short. If bearish, find the specific reason someone smart could be long. Don't produce mush.
+
+Chinese style guide: 直接、专业、避免翻译腔; 保持金融/加密行业术语原文 (TVL, funding rate, buyback 等首次出现可加中文注释, 例如 "TVL(锁仓总价值)"); 数字保留原格式.
 
 Output ONLY the JSON object. No preamble, no code fences, nothing else.`;
 
