@@ -2,47 +2,53 @@ import { COINGECKO_API } from '../util/constants.js';
 import { safeGet, pct } from '../util/http.js';
 import type { MarketData, CrossMarket } from '../types/snapshot.js';
 
-// ---------- Binance spot (most reliable primary source) ----------
-interface BinanceTicker24h {
-  lastPrice: string;
-  priceChangePercent: string;
-  quoteVolume: string;
-  openPrice: string;
+// ---------- Bybit spot (reliable from GH runners; Binance returns 451) ----------
+interface BybitSpotTicker {
+  result?: {
+    list?: Array<{
+      symbol: string;
+      lastPrice: string;
+      prevPrice24h: string;
+      price24hPcnt: string;
+      turnover24h: string; // USDT volume
+    }>;
+  };
 }
 
-interface BinanceKline {
-  0: number; // openTime
-  1: string; // open
-  2: string; // high
-  3: string; // low
-  4: string; // close
-  5: string; // volume
+interface BybitKlineResponse {
+  result?: {
+    list?: Array<[string, string, string, string, string, string, string]>;
+    // [startTime, open, high, low, close, volume, turnover]
+  };
 }
 
-async function fetchBinanceSpot(errors: string[]) {
+async function fetchBybitSpot(errors: string[]) {
   const [ticker, klines] = await Promise.all([
-    safeGet<BinanceTicker24h>(
-      'https://api.binance.com/api/v3/ticker/24hr?symbol=UNIUSDT',
+    safeGet<BybitSpotTicker>(
+      'https://api.bybit.com/v5/market/tickers?category=spot&symbol=UNIUSDT',
       {},
       errors,
-      'binance:ticker'
+      'bybit:spot-ticker'
     ),
-    // 8 daily candles -> 7-day change
-    safeGet<BinanceKline[]>(
-      'https://api.binance.com/api/v3/klines?symbol=UNIUSDT&interval=1d&limit=8',
+    // 8 daily candles -> 7-day change (interval D = 1 day)
+    safeGet<BybitKlineResponse>(
+      'https://api.bybit.com/v5/market/kline?category=spot&symbol=UNIUSDT&interval=D&limit=8',
       {},
       errors,
-      'binance:klines'
+      'bybit:spot-kline'
     ),
   ]);
 
-  const price = ticker ? parseFloat(ticker.lastPrice) : null;
-  const change24h = ticker ? parseFloat(ticker.priceChangePercent) : null;
-  const volume24h = ticker ? parseFloat(ticker.quoteVolume) : null;
+  const t = ticker?.result?.list?.[0];
+  const price = t?.lastPrice ? parseFloat(t.lastPrice) : null;
+  const change24h = t?.price24hPcnt ? parseFloat(t.price24hPcnt) * 100 : null;
+  const volume24h = t?.turnover24h ? parseFloat(t.turnover24h) : null;
 
+  const list = klines?.result?.list;
   let change7d: number | null = null;
-  if (Array.isArray(klines) && klines.length >= 8 && price != null) {
-    const price7dAgo = parseFloat(klines[0][4]); // close of 7 days ago
+  // Bybit returns newest-first; last element is oldest
+  if (Array.isArray(list) && list.length >= 8 && price != null) {
+    const price7dAgo = parseFloat(list[list.length - 1][4]);
     change7d = pct(price, price7dAgo);
   }
 
@@ -64,9 +70,8 @@ interface CGResponse {
 }
 
 export async function fetchMarketData(errors: string[]): Promise<MarketData> {
-  // Fire both in parallel; whichever succeeds first fills the gap
-  const [binance, cg] = await Promise.all([
-    fetchBinanceSpot(errors),
+  const [bybit, cg] = await Promise.all([
+    fetchBybitSpot(errors),
     safeGet<CGResponse>(
       `${COINGECKO_API}/coins/uniswap?localization=false&tickers=false&community_data=false&developer_data=false`,
       {},
@@ -77,13 +82,13 @@ export async function fetchMarketData(errors: string[]): Promise<MarketData> {
 
   const md = cg?.market_data;
 
-  // Prefer Binance for spot metrics (more reliable from CI runners);
-  // fall back to CoinGecko field-by-field.
+  // Prefer Bybit for real-time spot metrics (fast + reliable from CI);
+  // CoinGecko for slower-moving stats (market cap, FDV, ATH) and fallback.
   return {
-    priceUsd: binance.price ?? md?.current_price?.usd ?? null,
-    priceChange24hPct: binance.change24h ?? md?.price_change_percentage_24h ?? null,
-    priceChange7dPct: binance.change7d ?? md?.price_change_percentage_7d ?? null,
-    volume24hUsd: binance.volume24h ?? md?.total_volume?.usd ?? null,
+    priceUsd: bybit.price ?? md?.current_price?.usd ?? null,
+    priceChange24hPct: bybit.change24h ?? md?.price_change_percentage_24h ?? null,
+    priceChange7dPct: bybit.change7d ?? md?.price_change_percentage_7d ?? null,
+    volume24hUsd: bybit.volume24h ?? md?.total_volume?.usd ?? null,
     marketCapUsd: md?.market_cap?.usd ?? null,
     fdvUsd: md?.fully_diluted_valuation?.usd ?? null,
     ath: md?.ath?.usd ?? null,

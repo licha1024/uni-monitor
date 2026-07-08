@@ -1,67 +1,60 @@
-import { BINANCE_FUTURES_API } from '../util/constants.js';
 import { safeGet } from '../util/http.js';
 import type { DerivativesData } from '../types/snapshot.js';
 
-interface BinancePremium {
-  symbol: string;
-  markPrice: string;
-  lastFundingRate: string;
+// Bybit v5: works from GitHub-hosted runners (Binance returns 451).
+// Endpoint returns funding, mark, and open interest for the perp.
+interface BybitTickerResponse {
+  result?: {
+    list?: Array<{
+      symbol: string;
+      markPrice: string;
+      lastPrice: string;
+      openInterest: string;      // in contracts
+      openInterestValue: string; // in USD (v5 gives this directly)
+      fundingRate: string;
+    }>;
+  };
 }
 
-interface BinanceOI {
-  symbol: string;
-  openInterest: string;
-}
-
-interface BinanceLongShort {
-  symbol: string;
-  longShortRatio: string;
-  longAccount: string;
-  shortAccount: string;
-  timestamp: number;
+interface BybitLongShortResponse {
+  result?: {
+    list?: Array<{
+      buyRatio: string;
+      sellRatio: string;
+      timestamp: string;
+    }>;
+  };
 }
 
 export async function fetchDerivatives(errors: string[]): Promise<DerivativesData> {
-  const symbol = 'UNIUSDT';
-
-  const [premium, oi, longShort] = await Promise.all([
-    safeGet<BinancePremium>(
-      `${BINANCE_FUTURES_API}/premiumIndex?symbol=${symbol}`,
+  const [ticker, longShort] = await Promise.all([
+    safeGet<BybitTickerResponse>(
+      'https://api.bybit.com/v5/market/tickers?category=linear&symbol=UNIUSDT',
       {},
       errors,
-      'binance:premium'
+      'bybit:ticker'
     ),
-    safeGet<BinanceOI>(
-      `${BINANCE_FUTURES_API}/openInterest?symbol=${symbol}`,
+    safeGet<BybitLongShortResponse>(
+      'https://api.bybit.com/v5/market/account-ratio?category=linear&symbol=UNIUSDT&period=1d&limit=1',
       {},
       errors,
-      'binance:oi'
-    ),
-    safeGet<BinanceLongShort[]>(
-      `https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=${symbol}&period=1d&limit=1`,
-      {},
-      errors,
-      'binance:longshort'
+      'bybit:longshort'
     ),
   ]);
 
-  const mark = premium ? parseFloat(premium.markPrice) : null;
-  const oiRaw = oi ? parseFloat(oi.openInterest) : null;
-  const oiUsd = mark && oiRaw ? mark * oiRaw : null;
+  const t = ticker?.result?.list?.[0];
+  const openInterestUsd = t?.openInterestValue ? parseFloat(t.openInterestValue) : null;
+  const fundingRatePct = t?.fundingRate ? parseFloat(t.fundingRate) * 100 : null;
 
-  const fundingRate = premium
-    ? parseFloat(premium.lastFundingRate) * 100
-    : null;
-
-  const lsRatio =
-    Array.isArray(longShort) && longShort.length > 0
-      ? parseFloat(longShort[0].longShortRatio)
-      : null;
+  const ls = longShort?.result?.list?.[0];
+  const buy = ls?.buyRatio ? parseFloat(ls.buyRatio) : null;
+  const sell = ls?.sellRatio ? parseFloat(ls.sellRatio) : null;
+  const longShortRatio = buy != null && sell != null && sell > 0 ? buy / sell : null;
 
   return {
-    openInterestUsd: oiUsd,
-    fundingRatePct: fundingRate,
-    longShortRatio: lsRatio,
-    liquidations24hUsd: null, // Binance liq stream requires WS; deferred
+    openInterestUsd,
+    fundingRatePct,
+    longShortRatio,
+    liquidations24hUsd: null, // needs paid data source
   };
 }
