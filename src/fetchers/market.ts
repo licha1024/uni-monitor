@@ -2,53 +2,55 @@ import { COINGECKO_API } from '../util/constants.js';
 import { safeGet, pct } from '../util/http.js';
 import type { MarketData, CrossMarket } from '../types/snapshot.js';
 
-// ---------- Bybit spot (reliable from GH runners; Binance returns 451) ----------
-interface BybitSpotTicker {
-  result?: {
-    list?: Array<{
-      symbol: string;
-      lastPrice: string;
-      prevPrice24h: string;
-      price24hPcnt: string;
-      turnover24h: string; // USDT volume
-    }>;
-  };
+// ---------- OKX spot (works from GH runners; Binance 451, Bybit 403) ----------
+interface OKXTickerResponse {
+  code: string;
+  data: Array<{
+    instId: string;
+    last: string;
+    open24h: string;
+    vol24h: string;    // in base currency (UNI)
+    volCcy24h: string; // in quote currency (USDT) — this is $ volume
+  }>;
 }
 
-interface BybitKlineResponse {
-  result?: {
-    list?: Array<[string, string, string, string, string, string, string]>;
-    // [startTime, open, high, low, close, volume, turnover]
-  };
+interface OKXCandleResponse {
+  code: string;
+  // [ts, open, high, low, close, vol, volCcy, volCcyQuote, confirm]
+  data: string[][];
 }
 
-async function fetchBybitSpot(errors: string[]) {
-  const [ticker, klines] = await Promise.all([
-    safeGet<BybitSpotTicker>(
-      'https://api.bybit.com/v5/market/tickers?category=spot&symbol=UNIUSDT',
+async function fetchOkxSpot(errors: string[]) {
+  const [ticker, candles] = await Promise.all([
+    safeGet<OKXTickerResponse>(
+      'https://www.okx.com/api/v5/market/ticker?instId=UNI-USDT',
       {},
       errors,
-      'bybit:spot-ticker'
+      'okx:spot-ticker'
     ),
-    // 8 daily candles -> 7-day change (interval D = 1 day)
-    safeGet<BybitKlineResponse>(
-      'https://api.bybit.com/v5/market/kline?category=spot&symbol=UNIUSDT&interval=D&limit=8',
+    // Daily candles; 8 rows -> use oldest close to compute 7d change
+    safeGet<OKXCandleResponse>(
+      'https://www.okx.com/api/v5/market/candles?instId=UNI-USDT&bar=1D&limit=8',
       {},
       errors,
-      'bybit:spot-kline'
+      'okx:spot-candles'
     ),
   ]);
 
-  const t = ticker?.result?.list?.[0];
-  const price = t?.lastPrice ? parseFloat(t.lastPrice) : null;
-  const change24h = t?.price24hPcnt ? parseFloat(t.price24hPcnt) * 100 : null;
-  const volume24h = t?.turnover24h ? parseFloat(t.turnover24h) : null;
+  const t = ticker?.data?.[0];
+  const price = t?.last ? parseFloat(t.last) : null;
+  const open24 = t?.open24h ? parseFloat(t.open24h) : null;
+  const change24h =
+    price != null && open24 != null && open24 > 0
+      ? ((price - open24) / open24) * 100
+      : null;
+  const volume24h = t?.volCcy24h ? parseFloat(t.volCcy24h) : null;
 
-  const list = klines?.result?.list;
+  // OKX returns newest-first. Last element is oldest close.
   let change7d: number | null = null;
-  // Bybit returns newest-first; last element is oldest
-  if (Array.isArray(list) && list.length >= 8 && price != null) {
-    const price7dAgo = parseFloat(list[list.length - 1][4]);
+  const rows = candles?.data;
+  if (Array.isArray(rows) && rows.length >= 8 && price != null) {
+    const price7dAgo = parseFloat(rows[rows.length - 1][4]);
     change7d = pct(price, price7dAgo);
   }
 
@@ -70,8 +72,8 @@ interface CGResponse {
 }
 
 export async function fetchMarketData(errors: string[]): Promise<MarketData> {
-  const [bybit, cg] = await Promise.all([
-    fetchBybitSpot(errors),
+  const [okx, cg] = await Promise.all([
+    fetchOkxSpot(errors),
     safeGet<CGResponse>(
       `${COINGECKO_API}/coins/uniswap?localization=false&tickers=false&community_data=false&developer_data=false`,
       {},
@@ -82,13 +84,13 @@ export async function fetchMarketData(errors: string[]): Promise<MarketData> {
 
   const md = cg?.market_data;
 
-  // Prefer Bybit for real-time spot metrics (fast + reliable from CI);
+  // Prefer OKX for real-time spot metrics (Binance 451, Bybit 403 from CI);
   // CoinGecko for slower-moving stats (market cap, FDV, ATH) and fallback.
   return {
-    priceUsd: bybit.price ?? md?.current_price?.usd ?? null,
-    priceChange24hPct: bybit.change24h ?? md?.price_change_percentage_24h ?? null,
-    priceChange7dPct: bybit.change7d ?? md?.price_change_percentage_7d ?? null,
-    volume24hUsd: bybit.volume24h ?? md?.total_volume?.usd ?? null,
+    priceUsd: okx.price ?? md?.current_price?.usd ?? null,
+    priceChange24hPct: okx.change24h ?? md?.price_change_percentage_24h ?? null,
+    priceChange7dPct: okx.change7d ?? md?.price_change_percentage_7d ?? null,
+    volume24hUsd: okx.volume24h ?? md?.total_volume?.usd ?? null,
     marketCapUsd: md?.market_cap?.usd ?? null,
     fdvUsd: md?.fully_diluted_valuation?.usd ?? null,
     ath: md?.ath?.usd ?? null,
