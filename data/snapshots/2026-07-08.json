@@ -1,31 +1,31 @@
 {
   "snapshot": {
-    "timestamp": "2026-07-08T08:02:12.275Z",
+    "timestamp": "2026-07-08T08:31:36.233Z",
     "dateISO": "2026-07-08",
     "market": {
-      "priceUsd": null,
-      "priceChange24hPct": null,
-      "priceChange7dPct": null,
-      "volume24hUsd": null,
-      "marketCapUsd": null,
-      "fdvUsd": null,
-      "ath": null,
-      "athChangePct": null
+      "priceUsd": 3.2,
+      "priceChange24hPct": 1.08289,
+      "priceChange7dPct": 14.40471,
+      "volume24hUsd": 237348587,
+      "marketCapUsd": 1996205380,
+      "fdvUsd": 2870955713,
+      "ath": 44.92,
+      "athChangePct": -92.74861
     },
     "protocol": {
-      "tvlUsd": 3002939497,
-      "tvlChange7dPct": 5.259733924390623,
+      "tvlUsd": 3002736397,
+      "tvlChange7dPct": 5.252614815936591,
       "fees24hUsd": 1553881,
       "fees7dUsd": 10459878,
       "revenue24hUsd": 168018,
       "revenue7dUsd": 906438,
-      "unichainTvlUsd": 26080024.614665203
+      "unichainTvlUsd": 26080601.49753127
     },
     "onChain": {
-      "totalSupply": 1000000000,
-      "circulatingSupply": 893150420.0329479,
-      "burnedTotal": 106849579.96705213,
-      "treasuryBalance": 272134858.4790704,
+      "totalSupply": null,
+      "circulatingSupply": null,
+      "burnedTotal": null,
+      "treasuryBalance": null,
       "top10ConcentrationPct": null,
       "newBurns24h": null
     },
@@ -36,10 +36,10 @@
       "liquidations24hUsd": null
     },
     "crossMarket": {
-      "ethPriceUsd": null,
-      "uniEthRatio": null,
-      "btcDominance": null,
-      "defiTvlUsd": 73071425646.35649
+      "ethPriceUsd": 1737.59,
+      "uniEthRatio": 0.0018416312248574177,
+      "btcDominance": 55.93791127958876,
+      "defiTvlUsd": 73042248041.28511
     },
     "governance": {
       "activeProposals": [
@@ -49,34 +49,39 @@
           "url": "https://snapshot.box/#/s:uniswapgovernance.eth/proposal/0x3fda3c04fa106ad45173011ef4dfa5db2f14cd35c3c3a7a40f067a44cbadd5f4"
         }
       ],
-      "recentDiscussion": []
+      "recentDiscussion": [
+        "[Temp Check] Activate v4 Protocol Fees (https://gov.uniswap.org/t/temp-check-activate-v4-protocol-fees/26162)",
+        "Foundation inspection request — Cantina bounty mediation policy enforcement (finding #784, 29-day stalled dispute) (https://gov.uniswap.org/t/foundation-inspection-request-cantina-bounty-mediation-policy-enforcement-finding-784-29-day-stalled-dispute/26160)",
+        "URC-4: Active Liquidity Framework Hook Interface (https://gov.uniswap.org/t/urc-4-active-liquidity-framework-hook-interface/26156)",
+        "URC-3: Hook TVL and Effective Liquidity Reporting (https://gov.uniswap.org/t/urc-3-hook-tvl-and-effective-liquidity-reporting/26155)",
+        "URC-2: Custom Accounting Hook Swap Event (https://gov.uniswap.org/t/urc-2-custom-accounting-hook-swap-event/26154)"
+      ]
     },
     "errors": [
-      "coingecko:uniswap: timeout of 15000ms exceeded",
-      "binance:premium: timeout of 15000ms exceeded",
-      "binance:oi: timeout of 15000ms exceeded",
-      "binance:longshort: timeout of 15000ms exceeded",
-      "uni-forum:latest: timeout of 15000ms exceeded",
-      "coingecko:eth: timeout of 15000ms exceeded",
-      "coingecko:global: timeout of 15000ms exceeded"
+      "binance:ticker: Request failed with status code 451",
+      "binance:klines: Request failed with status code 451",
+      "binance:premium: Request failed with status code 451",
+      "binance:longshort: Request failed with status code 451",
+      "binance:oi: Request failed with status code 451",
+      "onchain: totalSupply read failed"
     ]
   },
   "analysis": {
-    "headline": "Structural net-inflation dominates: $8M annual buyback can't offset 20M UNI emission at any realistic price, keeping UNI dilutive despite the burn narrative.",
+    "headline": "UNI's 14% weekly bounce is narrative fuel from the v4 fee temp check, but the burn math is still net inflationary and the real-yield catalyst is absent.",
     "stance": "bearish",
     "confidence": "medium",
     "keyChanges": [
-      "Annualized revenue $47.26M implies $8.03M buyback budget — breakeven vs 20M UNI emission is ~$0.40, so UNI is net inflationary at every price above deep-VC-cost basis",
-      "TVL up 5.26% to $3.00B with $906K weekly protocol revenue — healthy but nowhere near the level needed to make burns matter",
-      "V4 Protocol Fees temp check is live on Snapshot — the only near-term catalyst that could materially shift the emission math"
+      "Price +14.4% 7d to $3.20 coinciding with [Temp Check] Activate v4 Protocol Fees going active on Snapshot",
+      "Annualized revenue $47.26M funds only $8.03M buybacks = 2.51M UNI burned vs 20M UNI emitted, leaving net inflation at +1.75%/yr",
+      "At $2.00B market cap on $47.26M annualized revenue, UNI trades ~42x P/S — expensive for a still-dilutive token"
     ],
-    "contrarianObservation": "The v4 fee temp check is underpriced optionality. V4 already captures the bulk of new pool creation on Ethereum; if fees activate and route through the buyback, annualized revenue could plausibly 2-3x, dragging burn breakeven toward realistic price levels and validating the DAO's $5.96 anchor. A patient long here front-runs a governance event the market is ignoring.",
+    "contrarianObservation": "Price sits 46% below the DAO's own $5.96 treasury-burn implied fair value while v4 fee activation could materially expand the buyback base. A smart long is buying the DAO's admission of underpricing before v4 fees compound with a future real-yield pivot — the asymmetry at $3.20 in the accumulation zone is real.",
     "watchNext": [
-      "V4 fee temp check vote outcome and any move from temp check to on-chain proposal",
-      "Real-yield RFC (buyback → stakers) surfacing with concrete timeline — this is the regime-change trigger",
-      "Weekly protocol revenue trend vs the $906K baseline; sustained move above $1.5M/week starts to matter"
+      "v4 Protocol Fee Temp Check vote outcome and modeled revenue uplift (does it 2-3x current $47M annualized?)",
+      "Any real-yield RFC surfacing on gov.uniswap.org — currently absent from active queue, which is the actual regime-change variable",
+      "Reclaim and hold of $4 (lower bound of $4-7 institutional accumulation zone) to confirm the rally is more than a short squeeze"
     ],
-    "fullReasoning": "Protocol revenue annualizes to $47.26M, producing an $8.03M buyback budget against 20M UNI/year in fixed emission. Breakeven for zero net inflation is roughly $0.40 — an order of magnitude below any realistic trading range. At the $3-3.5 retail capitulation zone, only ~2.3M UNI gets burned annually versus 20M minted, leaving ~17.7M UNI of net dilution (~2% of supply). This is the market's central problem and why bullish burn headlines have failed to produce sustained price action. TVL ticked up 5.26% to $3.00B, which is fine but not thesis-changing. The v4 fee temp check is the one live catalyst that could shift the math, but temp checks are early-stage — realistic timeline to activation is months. Data quality today is poor: no spot price, no derivatives, no funding, no cross-market context due to fetch timeouts. That constrains conviction on tactical positioning but not on the structural read. The DAO's own $5.96 treasury burn mark remains management's fair-value anchor; the market trades below it because the emission drag is being priced honestly. Bearish over 1-4 weeks unless v4 fees clear governance faster than expected or the real-yield RFC surfaces with concrete implementation timelines."
+    "fullReasoning": "UNI's 14% weekly rally is narrative-driven, not fundamentals-driven. Annualized protocol revenue of $47.26M funds an $8M buyback program — 2.51M UNI/year against 20M UNI in fixed emissions. The token remains net inflationary at +1.75% supply growth annually, meaning the burn narrative is currently theatrical. At $3.20, UNI trades ~42x annualized protocol revenue — not cheap for an asset that still dilutes holders. The v4 Protocol Fee Temp Check is the live catalyst, but even a favorable outcome only expands the revenue base; it doesn't fix the emission math unless revenue roughly triples at current price. More critically, the framework-defining variable — the real-yield RFC redirecting buybacks from burn to stakers — is absent from the active governance queue. Recent forum activity is technical (URC-2/3/4 hook standards) and administrative (Cantina bounty dispute), not regime-changing. Without the staking pivot, UNI stays a reflexive PE-multiple asset, and the multiple isn't attractive. Derivatives data is unavailable (Binance 451 geoblock), so positioning read is degraded — confidence held to medium rather than high. The $3-3.5 retail capitulation zone has held, and price sits 46% below the DAO's $5.96 burn-implied fair value. That gap is either opportunity or a signal the DAO overpaid its own treasury. With no live real-yield catalyst and continued dilution, 1-4 week bias is this rally fades toward $2.80-3.00 before the next structural leg."
   },
-  "savedAt": "2026-07-08T08:04:10.708Z"
+  "savedAt": "2026-07-08T08:52:36.529Z"
 }
