@@ -1,16 +1,16 @@
 {
   "snapshot": {
-    "timestamp": "2026-07-08T09:59:17.510Z",
+    "timestamp": "2026-07-08T10:11:23.444Z",
     "dateISO": "2026-07-08",
     "market": {
-      "priceUsd": 3.25,
-      "priceChange24hPct": 2.61334,
-      "priceChange7dPct": 16.99191,
-      "volume24hUsd": 267168761,
-      "marketCapUsd": 2021111161,
-      "fdvUsd": 2906775371,
+      "priceUsd": 3.228,
+      "priceChange24hPct": 1.6052880075543015,
+      "priceChange7dPct": 15.121255349500728,
+      "volume24hUsd": 6389831.430050596,
+      "marketCapUsd": 2002066459,
+      "fdvUsd": 2879385156,
       "ath": 44.92,
-      "athChangePct": -92.72554
+      "athChangePct": -92.77687
     },
     "protocol": {
       "tvlUsd": 3005066488,
@@ -19,7 +19,7 @@
       "fees7dUsd": 10459878,
       "revenue24hUsd": 168018,
       "revenue7dUsd": 906438,
-      "unichainTvlUsd": 26023955.277867887
+      "unichainTvlUsd": 26020231.25646079
     },
     "onChain": {
       "totalSupply": 1000000000,
@@ -30,16 +30,16 @@
       "newBurns24h": null
     },
     "derivatives": {
-      "openInterestUsd": null,
-      "fundingRatePct": null,
-      "longShortRatio": null,
+      "openInterestUsd": 14820012.272,
+      "fundingRatePct": -0.00146181920613,
+      "longShortRatio": 2.64,
       "liquidations24hUsd": null
     },
     "crossMarket": {
-      "ethPriceUsd": null,
-      "uniEthRatio": null,
-      "btcDominance": null,
-      "defiTvlUsd": 73041815044.2946
+      "ethPriceUsd": 1732.45,
+      "uniEthRatio": 0.0018632572368610927,
+      "btcDominance": 55.95643956486821,
+      "defiTvlUsd": 72979736885.30267
     },
     "governance": {
       "activeProposals": [
@@ -57,58 +57,51 @@
         "URC-2: Custom Accounting Hook Swap Event (https://gov.uniswap.org/t/urc-2-custom-accounting-hook-swap-event/26154)"
       ]
     },
-    "errors": [
-      "bybit:spot-kline: Request failed with status code 403",
-      "bybit:spot-ticker: Request failed with status code 403",
-      "bybit:ticker: Request failed with status code 403",
-      "bybit:longshort: Request failed with status code 403",
-      "coingecko:eth: Request failed with status code 429",
-      "coingecko:global: Request failed with status code 429"
-    ]
+    "errors": []
   },
   "analysis": {
     "headline": {
-      "en": "UNI reclaims $3.25 on v4 fee catalyst and TVL uptick, but net inflation caps upside — tactical long, structural skeptic.",
-      "zh": "UNI 借 v4 fee 催化剂与 TVL 回升重回 $3.25, 但净通胀压制空间 — 战术偏多, 结构存疑。"
+      "en": "v4 fee vote is the inflection point; net inflation (+1.96%/yr) remains structural anchor despite 7-day bounce",
+      "zh": "v4 费用激活投票是拐点；尽管 7 日反弹，净通胀(+1.96%/年)仍是结构性压力"
     },
-    "stance": "bullish",
+    "stance": "neutral",
     "confidence": "medium",
     "keyChanges": [
       {
-        "en": "Price +16.99% over 7d, bouncing off the $3-3.5 retail capitulation zone on $267M daily volume.",
-        "zh": "7 日涨幅 +16.99%, 在 $3-3.5 散户投降区间反弹, 日成交 $267M 放量确认。"
+        "en": "Price +15.12% over 7 days ($2.80→$3.23), recovering from local capitulation zone",
+        "zh": "价格 7 日涨 15.12%（$2.80→$3.23），从局部投降区反弹"
       },
       {
-        "en": "V4 Protocol Fees temp check is live on Snapshot — first governance catalyst to expand the buyback revenue base since UNIfication.",
-        "zh": "V4 Protocol Fees temp check 已在 Snapshot 启动 — UNIfication 后首个能扩大回购收入基数的治理催化剂。"
+        "en": "v4 fee activation proposal now in active voting—potential 30-50% protocol revenue boost if passed",
+        "zh": "v4 费用激活提案进入投票阶段——若通过，协议收入可能提升 30-50%"
       },
       {
-        "en": "Still net inflationary: $8.03M annual buyback burns ~2.47M UNI vs 20M emission, absorbing only 12.4% of new supply (+1.96%/yr net).",
-        "zh": "仍处净通胀: 年化回购 $8.03M 销毁约 2.47M UNI, 对应 20M 增发仅吸收 12.4% 新供给 (年化净通胀 +1.96%)。"
+        "en": "Net emission still +17.51M UNI/year (+1.96% inflation): burns 2.49M but emits 20M annually at current price",
+        "zh": "净增发仍为 +1751 万 UNI/年(+1.96% 通胀)：当前价格下年销毁 249 万但增发 2000 万"
       }
     ],
     "contrarianObservation": {
-      "en": "The buyback is USD-denominated, so a UNI rally mechanically shrinks the number of tokens burned per dollar — meaning every leg up makes the net inflation math WORSE unless protocol revenue scales faster than price. The rally is reflexively self-defeating; smart shorts fade strength above $4 unless fee revenue trends confirm.",
-      "zh": "回购预算以美元计价, UNI 上涨会机械性减少每美元销毁的代币数量 — 即价格每上一台阶, 净通胀数学反而恶化, 除非协议收入增速快于币价。反身性让上涨自我削弱; 聪明空头会在 $4 上方逢高做空, 除非 fee 收入趋势确认。"
+      "en": "Price is 45% below the DAO's own $5.96 fair value mark (treasury burn anchor), and pathetically low OI ($14.82M) means no one is positioned—if v4 passes, this is a perfect squeeze setup with minimal resistance to $5+",
+      "zh": "价格较 DAO 自己标记的 $5.96 公允价值(国库销毁锚定价)低 45%，且极低的持仓量($1482 万)意味着无人布局——若 v4 通过，这是完美的逼空设置，向上至 $5+ 阻力极小"
     },
     "watchNext": [
       {
-        "en": "V4 Protocol Fees temp check result and whether it advances to a binding on-chain vote within 2-3 weeks.",
-        "zh": "V4 Protocol Fees temp check 结果, 以及是否在 2-3 周内推进至具约束力的链上投票。"
+        "en": "v4 fee activation vote outcome—passage could flip revenue structure and validate $3-4 as accumulation zone",
+        "zh": "v4 费用激活投票结果——通过可能改变收入结构，验证 $3-4 为吸筹区间"
       },
       {
-        "en": "Real-yield RFC activity — its absence from the forum top-5 signals the staker-cash-flow pivot is NOT imminent; watch for a fresh thread.",
-        "zh": "Real-yield RFC 动态 — 其未出现在论坛前五说明质押现金流方案尚未临近, 关注是否有新贴出现。"
+        "en": "Net inflation breakeven threshold: needs protocol revenue >$64.6M annualized (currently $47.26M, shortfall $17.34M)",
+        "zh": "净通胀盈亏平衡点：需协议年化收入 >$6460 万(当前 $4726 万，缺口 $1734 万)"
       },
       {
-        "en": "Weekly protocol revenue trend: needs to sustain above $1.2M/wk to plausibly flip net inflation without a v4 fee turn-on.",
-        "zh": "协议周度收入趋势: 需持续 $1.2M/周以上, 才能在不启动 v4 fee 情况下扭转净通胀。"
+        "en": "Derivatives OI and volume—current $14.82M OI and $6.39M daily volume signal zero conviction; need >$50M OI for institutional re-entry",
+        "zh": "衍生品持仓量和成交量——当前 $1482 万 OI 和 $639 万日成交量显示零信念；需 >$5000 万 OI 表明机构重新入场"
       }
     ],
     "fullReasoning": {
-      "en": "UNI is bouncing off the $3-3.5 retail capitulation zone with a 17% weekly gain and TVL up 5.33% to $3.01B — tactically bullish over 1-4 weeks. The V4 Protocol Fees temp check is the live catalyst; if it advances to an on-chain vote and passes, it plugs the DEX's fastest-growing surface into the buyback pipe and reprices the revenue base. Structurally, however, this remains a net-inflationary asset: $8.03M/yr in buybacks against 20M UNI/yr of emission means burns absorb only 12% of new supply. Spot $3.25 sits 45% below the DAO's own $5.96 burn anchor, giving ~83% upside to fair value — that's the long thesis. But derivatives are a blackout (Bybit 403, no OI, no funding, no L/S ratio), so we cannot confirm positioning, forcing confidence to medium not high. Forum activity is dominated by v4 hook infrastructure work (URC-2/3/4), not the real-yield RFC, suggesting the staker-yield pivot is not imminent — this is a burn-regime trade, not a cash-flow re-rating. The Foundation dispute over Cantina bounty finding #784 is governance noise, not thesis-breaking. Play: accumulate weakness toward $3.10-3.20, trim into $3.80-4.00 on temp-check passage, invalidate below $2.95.",
-      "zh": "UNI 在 $3-3.5 散户投降区间反弹, 周涨 17%, TVL 上升 5.33% 至 $3.01B — 1-4 周维度战术性偏多。V4 Protocol Fees temp check 是当前活跃催化剂; 一旦推进至链上投票并通过, 将把 DEX 增长最快的板块接入回购管道, 重塑收入基数。但结构上, UNI 仍是净通胀资产: 年化回购 $8.03M 对应 20M UNI 年度增发, 销毁仅吸收 12% 的新增供给。现价 $3.25 相对 DAO 自身 $5.96 销毁锚定价折价 45%, 上行空间约 83% — 这是做多论点核心。然而衍生品数据全线缺失 (Bybit 403, 无 OI、无 funding、无多空比), 无法验证持仓结构, 因此信心只能定为中等而非高位。论坛热度集中在 v4 hook 基础设施 (URC-2/3/4), 而非 real-yield RFC, 说明质押分红机制尚未临近 — 这仍是 burn 机制下的交易, 而非现金流估值重估。Foundation 对 Cantina bounty finding #784 的争议属治理噪音, 不动摇论点。交易思路: $3.10-3.20 弱势区分批建仓, temp check 通过后于 $3.80-4.00 减仓, 跌破 $2.95 止损。"
+      "en": "UNI's 15% weekly bounce from the $2.80 local low looks encouraging on surface, but the structural problem remains: at $3.23, the protocol burns only 2.49M UNI annually while emitting 20M, resulting in net inflation of +1.96%. This $17.34M revenue gap is why the burn narrative hasn't sustained rallies. The price sits 45% below the DAO's own $5.96 burn anchor—an implicit fair value mark from the treasury operation. The active v4 fee activation vote is the critical catalyst. If passed, protocol revenue could jump 30-50%, potentially bringing net inflation closer to neutral and validating current price as a base. TVL growth (+5.33% weekly) and healthy fee generation ($10.46M/7d) suggest underlying protocol strength, but $14.82M derivatives OI and $6.39M daily volume reveal zero institutional conviction. The setup is binary: v4 passes and UNI reprices toward $5-6 on improved unit economics, or it fails and $3 support breaks on continued dilution. Low OI means few are positioned either way—a potential squeeze setup if governance delivers. Treat this as a governance event trade, not a momentum chase.",
+      "zh": "UNI 从 $2.80 局部低点的 15% 周反弹表面看起来令人鼓舞，但结构性问题依然存在：在 $3.23 价位，协议每年仅销毁 249 万 UNI，但增发 2000 万，导致净通胀率为 +1.96%。这 $1734 万的收入缺口是销毁叙事无法支撑持续上涨的原因。价格较 DAO 自己的 $5.96 销毁锚定价(国库操作隐含的公允价值标记)低 45%。正在进行的 v4 费用激活投票是关键催化剂。若通过，协议收入可能跃升 30-50%，有望将净通胀拉近中性，验证当前价格为底部区间。TVL 增长(周涨 5.33%)和健康的费用生成($1046 万/7 日)显示协议基本面稳固，但 $1482 万的衍生品持仓量和 $639 万日成交量暴露出机构零信念。设置是二元的：v4 通过则 UNI 因单位经济改善重新定价至 $5-6，失败则 $3 支撑因持续稀释而破位。低持仓量意味着双向布局极少——若治理兑现，这是潜在的逼空设置。将此视为治理事件交易，而非动量追涨。"
     }
   },
-  "savedAt": "2026-07-08T10:01:55.340Z"
+  "savedAt": "2026-07-08T10:13:53.380Z"
 }
