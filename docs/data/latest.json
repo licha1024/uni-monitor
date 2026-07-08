@@ -1,0 +1,82 @@
+{
+  "snapshot": {
+    "timestamp": "2026-07-08T08:02:12.275Z",
+    "dateISO": "2026-07-08",
+    "market": {
+      "priceUsd": null,
+      "priceChange24hPct": null,
+      "priceChange7dPct": null,
+      "volume24hUsd": null,
+      "marketCapUsd": null,
+      "fdvUsd": null,
+      "ath": null,
+      "athChangePct": null
+    },
+    "protocol": {
+      "tvlUsd": 3002939497,
+      "tvlChange7dPct": 5.259733924390623,
+      "fees24hUsd": 1553881,
+      "fees7dUsd": 10459878,
+      "revenue24hUsd": 168018,
+      "revenue7dUsd": 906438,
+      "unichainTvlUsd": 26080024.614665203
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 893150420.0329479,
+      "burnedTotal": 106849579.96705213,
+      "treasuryBalance": 272134858.4790704,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": null,
+      "fundingRatePct": null,
+      "longShortRatio": null,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": null,
+      "uniEthRatio": null,
+      "btcDominance": null,
+      "defiTvlUsd": 73071425646.35649
+    },
+    "governance": {
+      "activeProposals": [
+        {
+          "title": "[Temp Check] Activate v4 Protocol Fees",
+          "status": "active",
+          "url": "https://snapshot.box/#/s:uniswapgovernance.eth/proposal/0x3fda3c04fa106ad45173011ef4dfa5db2f14cd35c3c3a7a40f067a44cbadd5f4"
+        }
+      ],
+      "recentDiscussion": []
+    },
+    "errors": [
+      "coingecko:uniswap: timeout of 15000ms exceeded",
+      "binance:premium: timeout of 15000ms exceeded",
+      "binance:oi: timeout of 15000ms exceeded",
+      "binance:longshort: timeout of 15000ms exceeded",
+      "uni-forum:latest: timeout of 15000ms exceeded",
+      "coingecko:eth: timeout of 15000ms exceeded",
+      "coingecko:global: timeout of 15000ms exceeded"
+    ]
+  },
+  "analysis": {
+    "headline": "Structural net-inflation dominates: $8M annual buyback can't offset 20M UNI emission at any realistic price, keeping UNI dilutive despite the burn narrative.",
+    "stance": "bearish",
+    "confidence": "medium",
+    "keyChanges": [
+      "Annualized revenue $47.26M implies $8.03M buyback budget — breakeven vs 20M UNI emission is ~$0.40, so UNI is net inflationary at every price above deep-VC-cost basis",
+      "TVL up 5.26% to $3.00B with $906K weekly protocol revenue — healthy but nowhere near the level needed to make burns matter",
+      "V4 Protocol Fees temp check is live on Snapshot — the only near-term catalyst that could materially shift the emission math"
+    ],
+    "contrarianObservation": "The v4 fee temp check is underpriced optionality. V4 already captures the bulk of new pool creation on Ethereum; if fees activate and route through the buyback, annualized revenue could plausibly 2-3x, dragging burn breakeven toward realistic price levels and validating the DAO's $5.96 anchor. A patient long here front-runs a governance event the market is ignoring.",
+    "watchNext": [
+      "V4 fee temp check vote outcome and any move from temp check to on-chain proposal",
+      "Real-yield RFC (buyback → stakers) surfacing with concrete timeline — this is the regime-change trigger",
+      "Weekly protocol revenue trend vs the $906K baseline; sustained move above $1.5M/week starts to matter"
+    ],
+    "fullReasoning": "Protocol revenue annualizes to $47.26M, producing an $8.03M buyback budget against 20M UNI/year in fixed emission. Breakeven for zero net inflation is roughly $0.40 — an order of magnitude below any realistic trading range. At the $3-3.5 retail capitulation zone, only ~2.3M UNI gets burned annually versus 20M minted, leaving ~17.7M UNI of net dilution (~2% of supply). This is the market's central problem and why bullish burn headlines have failed to produce sustained price action. TVL ticked up 5.26% to $3.00B, which is fine but not thesis-changing. The v4 fee temp check is the one live catalyst that could shift the math, but temp checks are early-stage — realistic timeline to activation is months. Data quality today is poor: no spot price, no derivatives, no funding, no cross-market context due to fetch timeouts. That constrains conviction on tactical positioning but not on the structural read. The DAO's own $5.96 treasury burn mark remains management's fair-value anchor; the market trades below it because the emission drag is being priced honestly. Bearish over 1-4 weeks unless v4 fees clear governance faster than expected or the real-yield RFC surfaces with concrete implementation timelines."
+  },
+  "savedAt": "2026-07-08T08:04:10.708Z"
+}

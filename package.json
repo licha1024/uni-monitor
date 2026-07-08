@@ -8,6 +8,8 @@
     "run:dry": "tsx src/index.ts --dry-run",
     "run:send": "tsx src/index.ts --send --save",
     "run:save": "tsx src/index.ts --save",
+    "publish:site": "tsx src/publish/index.ts",
+    "publish:reuse": "tsx src/publish/index.ts --reuse-latest",
     "build": "tsc",
     "start": "node dist/index.js"
   },

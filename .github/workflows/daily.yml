@@ -1,0 +1,71 @@
+name: Daily UNI Analysis
+
+on:
+  schedule:
+    # 08:17 UTC daily = 16:17 Beijing / 03:17 Chicago. Off-minute intentional.
+    - cron: '17 8 * * *'
+  workflow_dispatch:
+    inputs:
+      reuse_latest:
+        description: 'Skip fetch+AI, just rebuild site from latest snapshot'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  analyze-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run analysis + build site
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+        run: |
+          if [ "${{ github.event.inputs.reuse_latest }}" = "true" ]; then
+            npm run publish:reuse
+          else
+            npm run publish:site
+          fi
+
+      - name: Commit snapshot + docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/snapshots docs
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: daily snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

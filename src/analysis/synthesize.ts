@@ -4,67 +4,81 @@ import { ANALYST_SYSTEM_PROMPT } from './system-prompt.js';
 import { renderSnapshotForAI } from './format.js';
 import type { UniSnapshot, DailyAnalysis } from '../types/snapshot.js';
 
-const client = new Anthropic({ apiKey: config.anthropicApiKey });
+const client = new Anthropic({
+  apiKey: config.anthropicApiKey,
+  ...(config.anthropicBaseUrl ? { baseURL: config.anthropicBaseUrl } : {}),
+});
 
-const RESPONSE_SCHEMA = {
-  type: 'object',
-  properties: {
-    headline: {
-      type: 'string',
-      description: 'One-sentence takeaway (max 30 words).',
-    },
-    stance: {
-      type: 'string',
-      enum: ['bullish', 'neutral', 'bearish'],
-      description: 'Directional bias over 1-4 weeks.',
-    },
-    confidence: {
-      type: 'string',
-      enum: ['low', 'medium', 'high'],
-    },
-    keyChanges: {
-      type: 'array',
-      items: { type: 'string' },
-      description:
-        'Exactly 3 most important changes vs. prior baseline. Concrete, with numbers.',
-    },
-    contrarianObservation: {
-      type: 'string',
-      description:
-        "One observation that cuts against the day's dominant reading. Required.",
-    },
-    watchNext: {
-      type: 'array',
-      items: { type: 'string' },
-      description:
-        '2-3 specific events or thresholds to watch tomorrow.',
-    },
-    fullReasoning: {
-      type: 'string',
-      description:
-        'A tight paragraph (150-250 words) walking through the logic connecting the metrics to your stance.',
-    },
-  },
-  required: [
-    'headline',
-    'stance',
-    'confidence',
-    'keyChanges',
-    'contrarianObservation',
-    'watchNext',
-    'fullReasoning',
-  ],
-  additionalProperties: false,
-};
+/**
+ * Normalize alternative field names to the canonical DailyAnalysis shape.
+ * Different providers/proxies sometimes let the model use variant schemas —
+ * we accept snake_case and a few common aliases.
+ */
+function normalize(raw: Record<string, unknown>): DailyAnalysis {
+  const pick = (...keys: string[]): unknown => {
+    for (const k of keys) {
+      if (raw[k] != null) return raw[k];
+    }
+    return undefined;
+  };
+
+  const asArray = (v: unknown): string[] => {
+    if (Array.isArray(v)) return v.map((x) => String(x));
+    if (typeof v === 'string') return [v];
+    if (v && typeof v === 'object') return Object.values(v).map((x) => String(x));
+    return [];
+  };
+
+  const asString = (v: unknown, fallback = ''): string => {
+    if (typeof v === 'string') return v;
+    if (v == null) return fallback;
+    return typeof v === 'object' ? JSON.stringify(v) : String(v);
+  };
+
+  const stance = asString(pick('stance'), 'neutral').toLowerCase();
+  const confidence = asString(pick('confidence'), 'low').toLowerCase();
+
+  const keyChanges = asArray(pick('keyChanges', 'key_changes', 'key_metrics', 'keyMetrics'));
+  const watchNext = asArray(pick('watchNext', 'watch_next', 'catalysts_bullish', 'catalystsBullish'));
+
+  // Build fullReasoning from whatever prose fields exist
+  const reasoningParts = [
+    asString(pick('fullReasoning', 'full_reasoning', 'reasoning')),
+    asString(pick('action_bias', 'actionBias')),
+    asString(pick('data_quality_note', 'dataQualityNote')),
+  ].filter(Boolean);
+
+  return {
+    headline: asString(pick('headline'), '(no headline)'),
+    stance: (['bullish', 'bearish', 'neutral'].includes(stance) ? stance : 'neutral') as DailyAnalysis['stance'],
+    confidence: (['low', 'medium', 'high'].includes(confidence) ? confidence : 'low') as DailyAnalysis['confidence'],
+    keyChanges: keyChanges.slice(0, 3),
+    contrarianObservation: asString(pick('contrarianObservation', 'contrarian_observation'), ''),
+    watchNext: watchNext.slice(0, 3),
+    fullReasoning: reasoningParts.join('\n\n'),
+  };
+}
 
 export async function synthesize(snapshot: UniSnapshot): Promise<DailyAnalysis> {
   const rendered = renderSnapshotForAI(snapshot);
 
-  const userMessage = `Today's UNI data snapshot follows. Analyze it and produce the JSON brief per the schema. Do NOT include any text outside the JSON object.
+  const userMessage = `Today's UNI data snapshot follows. Analyze it, then output ONLY a JSON object (no prose, no markdown code fences) matching this exact schema:
+
+{
+  "headline": string,                 // one-sentence takeaway, max 30 words
+  "stance": "bullish" | "neutral" | "bearish",
+  "confidence": "low" | "medium" | "high",
+  "keyChanges": string[],             // exactly 3, concrete with numbers
+  "contrarianObservation": string,    // MUST cut against your headline stance
+  "watchNext": string[],              // 2-3 items
+  "fullReasoning": string             // tight paragraph 150-250 words
+}
 
 ${rendered}
 
-Reminder: your contrarian observation must genuinely cut against your headline stance. If you say bullish, find the specific reason someone smart could be short. If bearish, find the specific reason someone smart could be long. Don't produce mush.`;
+Reminder: your contrarian observation must genuinely cut against your headline stance. If you say bullish, find the specific reason someone smart could be short. If bearish, find the specific reason someone smart could be long. Don't produce mush.
+
+Output ONLY the JSON object. No preamble, no code fences, nothing else.`;
 
   const response = await client.messages.create({
     model: 'claude-opus-4-7',
@@ -79,12 +93,6 @@ Reminder: your contrarian observation must genuinely cut against your headline s
       },
     ],
     messages: [{ role: 'user', content: userMessage }],
-    output_config: {
-      format: {
-        type: 'json_schema',
-        schema: RESPONSE_SCHEMA,
-      },
-    },
   });
 
   // Log cache stats (helps confirm caching works across runs)
@@ -104,6 +112,39 @@ Reminder: your contrarian observation must genuinely cut against your headline s
     throw new Error('No text block in Claude response');
   }
 
-  const parsed = JSON.parse(textBlock.text);
-  return parsed as DailyAnalysis;
+  const parsed = extractJson(textBlock.text);
+  return normalize(parsed as Record<string, unknown>);
+}
+
+/**
+ * Robust JSON extractor. Handles:
+ *  - pure JSON
+ *  - JSON wrapped in ```json ... ``` fences (proxies without structured-output support)
+ *  - JSON with prose before/after the object
+ */
+function extractJson(text: string): unknown {
+  const trimmed = text.trim();
+
+  // Try direct parse first
+  try {
+    return JSON.parse(trimmed);
+  } catch { /* fall through */ }
+
+  // Strip markdown code fences
+  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fenced) {
+    try {
+      return JSON.parse(fenced[1].trim());
+    } catch { /* fall through */ }
+  }
+
+  // Grab first {...} block
+  const first = trimmed.indexOf('{');
+  const last = trimmed.lastIndexOf('}');
+  if (first !== -1 && last > first) {
+    const candidate = trimmed.slice(first, last + 1);
+    return JSON.parse(candidate);
+  }
+
+  throw new Error(`Could not extract JSON from Claude response:\n${text.slice(0, 500)}`);
 }

@@ -17,6 +17,7 @@ function boolFlag(key: string): boolean {
 
 export const config = {
   anthropicApiKey: required('ANTHROPIC_API_KEY'),
+  anthropicBaseUrl: optional('ANTHROPIC_BASE_URL'), // optional custom endpoint (proxy)
   ethRpcUrl: optional('ETH_RPC_URL', 'https://ethereum-rpc.publicnode.com'),
   etherscanApiKey: optional('ETHERSCAN_API_KEY'),
 
