@@ -57,10 +57,20 @@ jobs:
           git add data/snapshots docs
           if git diff --cached --quiet; then
             echo "No changes to commit."
-          else
-            git commit -m "chore: daily snapshot $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          git commit -m "chore: daily snapshot $(date -u +%Y-%m-%d)"
+          # Retry push against remote — handles the case where a human
+          # pushed between checkout and now. Rebase our commit on top.
+          for i in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push #$i rejected; pulling with rebase and retrying..."
+            git pull --rebase origin main
+          done
+          echo "Failed to push after 3 attempts"
+          exit 1
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

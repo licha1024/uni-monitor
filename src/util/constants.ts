@@ -15,7 +15,7 @@ export const COINGECKO_API = 'https://api.coingecko.com/api/v3';
 export const DEFILLAMA_API = 'https://api.llama.fi';
 export const DEFILLAMA_COINS_API = 'https://coins.llama.fi';
 export const ETHERSCAN_API = 'https://api.etherscan.io/api';
-export const BINANCE_FUTURES_API = 'https://fapi.binance.com/fapi/v1';
+export const BINANCE_FUTURES_API = 'https://fapi.binance.com/fapi/v1'; // deprecated: GH runners get 451; use Bybit instead
 
 // Governance
 export const UNI_FORUM_URL = 'https://gov.uniswap.org';
