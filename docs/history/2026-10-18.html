@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNI Brief 2026-10-18 — BEARISH</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #1c232c;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --amber: #d29922;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+/* Language switching: hide the inactive language */
+html[data-lang="zh"] .lang-en { display: none; }
+html[data-lang="en"] .lang-zh { display: none; }
+/* Default before JS runs: show Chinese (Chinese is the site's default) */
+.lang-en { display: none; }
+html[data-lang="en"] .lang-en { display: inline; }
+html[data-lang="en"] .lang-zh { display: none; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
+header { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 28px; }
+header .title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+header .title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 28px; letter-spacing: -0.5px; }
+header .subtitle { color: var(--text-dim); font-size: 14px; }
+header .nav { margin-top: 12px; display: flex; gap: 20px; font-size: 14px; }
+header .nav a { color: var(--accent); text-decoration: none; }
+header .nav a:hover { text-decoration: underline; }
+.lang-toggle {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 48px;
+  transition: all 0.15s;
+}
+.lang-toggle:hover { background: var(--panel-2); border-color: var(--accent); color: var(--accent); }
+
+/* ---------- live ticker ---------- */
+.live-ticker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  flex-wrap: wrap;
+}
+.live-ticker[data-loading="true"] .live-price,
+.live-ticker[data-loading="true"] .live-change { opacity: 0.4; }
+.live-ticker[data-error="true"] { border-color: #cc5555; }
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.live-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+.live-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  transition: background-color 0.5s ease-out;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: -6px;
+}
+.live-change { font-weight: 600; }
+.live-updated {
+  color: var(--text-dim);
+  font-size: 12px;
+  margin-left: auto;
+}
+@keyframes flashUp {
+  0%   { background-color: rgba(34, 197, 94, 0.35); }
+  100% { background-color: transparent; }
+}
+@keyframes flashDown {
+  0%   { background-color: rgba(239, 68, 68, 0.35); }
+  100% { background-color: transparent; }
+}
+.live-price.flash-up   { animation: flashUp 1s ease-out; }
+.live-price.flash-down { animation: flashDown 1s ease-out; }
+.stance-pill {
+  display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.stance-bullish { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+.stance-bearish { background: rgba(248, 81, 73, 0.15); color: var(--red); }
+.stance-neutral { background: rgba(139, 148, 158, 0.15); color: var(--text-dim); }
+.headline { font-size: 20px; margin: 16px 0; line-height: 1.4; }
+h2 {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-dim); margin: 28px 0 12px; font-weight: 600;
+}
+.metrics {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+}
+.metric { display: flex; flex-direction: column; gap: 2px; }
+.metric-label { color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.metric-value { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.metric-value.pos { color: var(--green); }
+.metric-value.neg { color: var(--red); }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+.card p { color: var(--text); }
+.contrarian { border-left: 3px solid var(--amber); background: rgba(210, 153, 34, 0.06); }
+.contrarian .label { color: var(--amber); font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+ol, ul { padding-left: 22px; }
+ol li, ul li { margin-bottom: 6px; }
+a { color: var(--accent); }
+.footer { color: var(--text-dim); font-size: 12px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+.error-note { background: rgba(248, 81, 73, 0.06); border-left: 3px solid var(--red); padding: 8px 12px; margin-top: 12px; font-size: 12px; color: var(--text-dim); }
+.history-list { display: grid; gap: 8px; }
+.history-item { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+.history-item a { text-decoration: none; }
+.history-date { font-variant-numeric: tabular-nums; color: var(--text); font-weight: 500; }
+.history-headline { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
+.badge-info { color: var(--text-dim); font-size: 12px; }
+code { background: var(--panel-2); padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+</style>
+<script>
+  (function() {
+    try {
+      var lang = localStorage.getItem('uniMonitorLang') || 'zh';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+    } catch (e) {
+      document.documentElement.setAttribute('data-lang', 'zh');
+    }
+  })();
+</script>
+</head>
+<body>
+<div class="container">
+  
+<div id="live-ticker" class="live-ticker" data-loading="true">
+  <span class="live-dot" aria-hidden="true"></span>
+  <span class="live-label"><span class="lang-en">LIVE</span><span class="lang-zh">实时</span></span>
+  <span class="live-price" id="live-price">—</span>
+  <span class="live-change" id="live-change">—</span>
+  <span class="live-updated" id="live-updated"></span>
+</div>
+<header>
+  <div class="title-row">
+    <div class="title">
+      <h1>UNI Monitor</h1>
+      <span class="subtitle"><span class="lang-en">Report for 2026-10-18</span><span class="lang-zh">2026-10-18 报告</span></span>
+    </div>
+    <button id="lang-toggle" class="lang-toggle" title="Switch language / 切换语言">
+      <span class="lang-en">中</span><span class="lang-zh">EN</span>
+    </button>
+  </div>
+  <nav class="nav">
+    <a href="../index.html"><span class="lang-en">Latest</span><span class="lang-zh">最新</span></a>
+    <a href="../history.html"><span class="lang-en">History</span><span class="lang-zh">历史</span></a>
+    <a href="https://github.com/licha1024/uni-monitor" target="_blank"><span class="lang-en">GitHub</span><span class="lang-zh">GitHub</span></a>
+  </nav>
+</header>
+
+
+  <span class="stance-pill stance-bearish"><span class="lang-en">BEARISH</span><span class="lang-zh">看空</span> · <span class="lang-en">medium</span><span class="lang-zh">中</span> <span class="lang-en">confidence</span><span class="lang-zh">置信度</span></span>
+  <p class="headline"><span class="lang-en">UNI trades 21% above DAO burn anchor while net inflation persists at +2% annually; liquidity death confirmed by 0.2% daily turnover.</span><span class="lang-zh">UNI 价格较 DAO 回购成本溢价 21%，但年化净通胀率仍达 +2%；日成交量仅占市值 0.2%，流动性枯竭确认。</span></p>
+
+  <h2><span class="lang-en">Market</span><span class="lang-zh">市场</span></h2>
+  <div class="metrics">
+    <div class="metric"><span class="metric-label"><span class="lang-en">Price</span><span class="lang-zh">价格</span></span><span class="metric-value">$7.2240</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">24h</span><span class="lang-zh">24小时</span></span><span class="metric-value pos">+0.07%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">7d</span><span class="lang-zh">7天</span></span><span class="metric-value neg">-6.46%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">24h Volume</span><span class="lang-zh">24小时成交量</span></span><span class="metric-value">$9.38M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Market Cap</span><span class="lang-zh">流通市值</span></span><span class="metric-value">$4.51B</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">FDV</span><span class="lang-zh">完全稀释估值</span></span><span class="metric-value">$6.40B</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">ATH Distance</span><span class="lang-zh">距历史高点</span></span><span class="metric-value neg">-83.92%</span></div>
+  </div>
+
+  <h2><span class="lang-en">Protocol</span><span class="lang-zh">协议</span></h2>
+  <div class="metrics">
+    <div class="metric"><span class="metric-label"><span class="lang-en">TVL</span><span class="lang-zh">锁仓总量</span></span><span class="metric-value">n/a</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">TVL 7d</span><span class="lang-zh">TVL 7日变化</span></span><span class="metric-value ">n/a</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Fees 24h</span><span class="lang-zh">24小时费用</span></span><span class="metric-value">$1.80M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Fees 7d</span><span class="lang-zh">7日费用</span></span><span class="metric-value">$19.16M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Revenue 7d</span><span class="lang-zh">7日协议收入</span></span><span class="metric-value">$1.74M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Unichain TVL</span><span class="lang-zh">Unichain TVL</span></span><span class="metric-value">$26.53M</span></div>
+  </div>
+
+  <h2><span class="lang-en">Derivatives</span><span class="lang-zh">衍生品</span></h2>
+  <div class="metrics">
+    <div class="metric"><span class="metric-label"><span class="lang-en">Open Interest</span><span class="lang-zh">未平仓合约</span></span><span class="metric-value">$40.90M</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Funding Rate</span><span class="lang-zh">资金费率</span></span><span class="metric-value pos">+0.00%</span></div>
+    <div class="metric"><span class="metric-label"><span class="lang-en">Long/Short Ratio</span><span class="lang-zh">多空比</span></span><span class="metric-value">1.960</span></div>
+  </div>
+
+  <h2><span class="lang-en">Today's 3 Key Changes</span><span class="lang-zh">今日三大变化</span></h2>
+  <div class="card"><ol><li><span class="lang-en">Net inflation remains at +2.01%/year: only 2.14M UNI burned vs 20M emitted, covering just 10.7% of emissions despite burn narrative.</span><span class="lang-zh">年化净通胀率维持在 +2.01%：仅销毁 214 万 UNI，相对 2000 万年度增发仅覆盖 10.7%，回购叙事失效。</span></li><li><span class="lang-en">Price premium to treasury burn anchor expanded to +21% ($7.22 vs $5.96 DAO cost basis), suggesting compression risk ahead.</span><span class="lang-zh">价格较国库回购成本基准溢价扩大至 +21%（$7.22 vs DAO 成本 $5.96），暗示回调压力。</span></li><li><span class="lang-en">24h volume collapsed to $9.38M (0.2% of mcap turnover), signaling liquidity crisis and zero conviction from traders.</span><span class="lang-zh">24 小时成交量暴跌至 938 万美元（市值换手率仅 0.2%），显示流动性危机与交易者信心缺失。</span></li></ol></div>
+
+  <h2><span class="lang-en">Contrarian Observation</span><span class="lang-zh">反向观察</span></h2>
+  <div class="card contrarian">
+    <div class="label"><span class="lang-en">Reality Check</span><span class="lang-zh">警醒视角</span></div>
+    <p><span class="lang-en">Arc protocol fee expansion proposal could increase annualized revenue 30-50% within two quarters; at $150M revenue, buybacks would cover 50% of emissions at current price, materially improving the inflation dynamic before any real-yield vote.</span><span class="lang-zh">Arc 协议手续费扩展提案可能在两季度内使年化收入增长 30-50%；若收入达 1.5 亿美元，当前价格下回购可覆盖 50% 增发，在真实收益投票前即可实质改善通胀动态。</span></p>
+  </div>
+
+  <h2><span class="lang-en">Full Read</span><span class="lang-zh">完整解读</span></h2>
+  <div class="card"><p><span class="lang-en">UNI is trapped in a structural bear case. Price sits 21% above the DAO's own burn-cost anchor of $5.96, yet the token remains net inflationary at +2.01% annually. With only 2.14M UNI burned against 20M emitted, buybacks cover just 10.7% of emissions. At current protocol revenue of $91M/year and 17% fee capture, the buyback budget is $15.5M — nowhere near sufficient. Break-even requires either $849M annual revenue or price falling to $3.86. The volume signal confirms weakness: $9.38M daily turnover on $4.51B market cap is 0.2%, indicating complete absence of conviction. This isn't compression; it's liquidity death. The 7-day -6.46% trend confirms directional weakness, while 0.00% funding shows no aggressive positioning either way — the market simply doesn't care. Governance reveals no urgency on the real-yield pivot that would reframe UNI as a cash-flow asset. Forums discuss technical features (v4 hooks, privacy) instead of the economic transformation traders await. Without that catalyst, UNI remains in valuation limbo: neither a governance token (turnout is negligible) nor a yield asset (no distributions). With BTC dominance at 60%, capital continues rotating out of DeFi alts. The premium to treasury burn cost suggests either optimistic revenue projections being priced in or a compression trade waiting to happen. Given the emission math, compression toward $5.80-6.50 over 3-4 weeks seems more probable than expansion. The bear case only breaks if Arc expansion meaningfully accelerates revenue or real-yield discussion gains momentum.</span><span class="lang-zh">UNI 陷入结构性困境。价格较 DAO 回购成本基准 $5.96 溢价 21%，但代币年化净通胀率仍达 +2.01%。仅销毁 214 万 UNI，相对 2000 万年度增发，回购仅覆盖 10.7%。当前协议年化收入 9097 万美元，17% 手续费分成下回购预算仅 1547 万美元，远远不足。达到收支平衡需协议收入 8.49 亿美元或价格跌至 $3.86。成交量信号确认疲软：938 万美元日成交对应 45.1 亿美元市值，换手率仅 0.2%，显示信心完全缺失。这不是波动率压缩，而是流动性枯竭。7 日跌幅 -6.46% 确认方向性弱势，而 0.00% 资金费率显示双方均未激进建仓 —— 市场根本不关注。治理层面未见真实收益转型紧迫性，论坛讨论集中在技术细节（v4 hooks、隐私功能）而非交易者等待的经济模式转型。缺乏该催化剂，UNI 持续处于估值真空：既非治理代币（投票率极低）也非收益资产（无分红）。BTC 主导率达 60%，资金持续流出 DeFi 山寨币。价格相对国库成本溢价暗示市场要么在定价乐观收入预期，要么是等待发生的回调交易。考虑增发数学，未来 3-4 周回调至 $5.80-6.50 区间概率更高。唯有 Arc 扩展实质性提升收入或真实收益讨论获得动能，空头逻辑方可打破。</span></p></div>
+
+  <h2><span class="lang-en">Watch Next</span><span class="lang-zh">接下来关注</span></h2>
+  <div class="card"><ul><li><span class="lang-en">Arc fee expansion temp check vote outcome — passage could add $30-45M to annual revenue run-rate.</span><span class="lang-zh">Arc 手续费扩展温度检查投票结果 —— 通过可能为年化收入增加 3000-4500 万美元。</span></li><li><span class="lang-en">Protocol revenue crossing $150M annualized threshold — would reduce net inflation to ~1% and shift narrative.</span><span class="lang-zh">协议年化收入突破 1.5 亿美元阈值 —— 将使净通胀率降至约 1%，改变市场叙事。</span></li><li><span class="lang-en">Real-yield RFC emergence in governance forums — serious discussion would trigger 20-30% reflexive bounce.</span><span class="lang-zh">真实收益 RFC 在治理论坛出现 —— 严肃讨论将引发 20-30% 反身性反弹。</span></li></ul></div>
+
+  
+
+  <div class="footer">
+    <span class="lang-en">Data: CoinGecko · DeFiLlama · Ethereum RPC · Bybit · Snapshot.</span><span class="lang-zh">数据源: CoinGecko · DeFiLlama · 以太坊 RPC · Bybit · Snapshot.</span><br>
+    <span class="lang-en">AI synthesis: &lt;code&gt;claude-opus-4-7&lt;/code&gt; with adaptive thinking + prompt caching.</span><span class="lang-zh">AI 合成: &lt;code&gt;claude-opus-4-7&lt;/code&gt; 自适应思考 + prompt caching.</span><br>
+    <span class="lang-en">Timestamp</span><span class="lang-zh">时间戳</span>: 2026-10-18T12:35:56.281Z
+    <div class="error-note">1 fetcher warning(s): defillama:uniswap-tvl: timeout of 20000ms exceeded</div>
+  </div>
+</div>
+
+<script>
+  // ---------- language toggle ----------
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    var cur = document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+    var next = cur === 'zh' ? 'en' : 'zh';
+    document.documentElement.setAttribute('data-lang', next);
+    document.documentElement.setAttribute('lang', next === 'zh' ? 'zh-CN' : 'en');
+    try { localStorage.setItem('uniMonitorLang', next); } catch(e){}
+  });
+
+  // ---------- live price ticker ----------
+  (function() {
+    var priceEl = document.getElementById('live-price');
+    var changeEl = document.getElementById('live-change');
+    var updatedEl = document.getElementById('live-updated');
+    var tickerEl = document.getElementById('live-ticker');
+    if (!priceEl) return;
+
+    var lastPrice = null;
+
+    function fmtPrice(p) { return '$' + p.toFixed(4); }
+    function fmtPct(p)   { return (p >= 0 ? '+' : '') + p.toFixed(2) + '%'; }
+    function fmtTime(d)  {
+      var pad = function(n){return n<10?'0'+n:n;};
+      return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    }
+
+    async function fromOkx() {
+      var r = await fetch('https://www.okx.com/api/v5/market/ticker?instId=UNI-USDT', { cache: 'no-store' });
+      var j = await r.json();
+      var d = j && j.data && j.data[0];
+      if (!d) throw new Error('okx: empty');
+      var last = parseFloat(d.last);
+      var open = parseFloat(d.open24h);
+      return { price: last, change24h: open > 0 ? (last - open) / open * 100 : null };
+    }
+
+    async function fromCoinGecko() {
+      var r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=uniswap&vs_currencies=usd&include_24hr_change=true', { cache: 'no-store' });
+      var j = await r.json();
+      var u = j && j.uniswap;
+      if (!u) throw new Error('cg: empty');
+      return { price: u.usd, change24h: u.usd_24h_change != null ? u.usd_24h_change : null };
+    }
+
+    async function refresh() {
+      var data;
+      try { data = await fromOkx(); }
+      catch (e1) {
+        try { data = await fromCoinGecko(); }
+        catch (e2) { tickerEl.setAttribute('data-error', 'true'); return; }
+      }
+      tickerEl.removeAttribute('data-error');
+      tickerEl.removeAttribute('data-loading');
+
+      priceEl.textContent = fmtPrice(data.price);
+      if (data.change24h != null) {
+        changeEl.textContent = fmtPct(data.change24h) + ' 24h';
+        changeEl.className = 'live-change ' + (data.change24h >= 0 ? 'pos' : 'neg');
+      }
+      updatedEl.textContent = fmtTime(new Date());
+
+      // flash green/red when price moves
+      if (lastPrice != null && data.price !== lastPrice) {
+        var dir = data.price > lastPrice ? 'flash-up' : 'flash-down';
+        priceEl.classList.remove('flash-up', 'flash-down');
+        // force reflow so animation restarts
+        void priceEl.offsetWidth;
+        priceEl.classList.add(dir);
+      }
+      lastPrice = data.price;
+    }
+
+    refresh();
+    setInterval(refresh, 60000);
+    // Also refresh when the tab regains focus after being hidden a while
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) refresh();
+    });
+  })();
+</script>
+</body>
+</html>
