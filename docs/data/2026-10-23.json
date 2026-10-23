@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-10-23T13:23:48.006Z",
+    "dateISO": "2026-10-23",
+    "market": {
+      "priceUsd": 7.176,
+      "priceChange24hPct": 1.0277347599605857,
+      "priceChange7dPct": -0.9387078961899451,
+      "volume24hUsd": 11642820.28962271,
+      "marketCapUsd": 4463152182,
+      "fdvUsd": 6337152581,
+      "ath": 44.92,
+      "athChangePct": -84.09072
+    },
+    "protocol": {
+      "tvlUsd": 4089593315,
+      "tvlChange7dPct": 4.124257628391898,
+      "fees24hUsd": 2410417.54,
+      "fees7dUsd": 15893323.68,
+      "revenue24hUsd": 242260,
+      "revenue7dUsd": 1540510,
+      "unichainTvlUsd": 26167966.39687635
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 886818418.7863698,
+      "burnedTotal": 113181581.21363024,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 36878024.224,
+      "fundingRatePct": 0.006766070123129999,
+      "longShortRatio": 2.22,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 2401.33,
+      "uniEthRatio": 0.002988343959389172,
+      "btcDominance": 59.44193317081914,
+      "defiTvlUsd": 90415721186.32234
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)",
+        "[Discussion] Should v4 hooks on Robinhood Chain standardize session-aware pricing? (https://gov.uniswap.org/t/discussion-should-v4-hooks-on-robinhood-chain-standardize-session-aware-pricing/26297)",
+        "[Temp Check] Protocol Fee Expansion: Arc (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-arc/26287)",
+        "[Temp Check] Rotate Sentinel Addresses on the DUNI-Owned Uniswap Earn Vaults (https://gov.uniswap.org/t/temp-check-rotate-sentinel-addresses-on-the-duni-owned-uniswap-earn-vaults/26281)",
+        "[RFC] Web4 Autonomous State Engines on Unichain: Utilizing ERC-6551 & Sovereign ERC-721 Force Transfers for Dynamic Asset Orchestration (https://gov.uniswap.org/t/rfc-web4-autonomous-state-engines-on-unichain-utilizing-erc-6551-sovereign-erc-721-force-transfers-for-dynamic-asset-orchestration/26229)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "UNI holds above treasury burn price despite persistent net inflation of 18M tokens/year - structurally capped until governance acts",
+      "zh": "UNI 守住国库成本位但年净增发 1800 万枚持续施压——结构性上限待治理突破"
+    },
+    "stance": "bearish",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "Net inflation confirmed at +18.1M UNI/year despite burns - only 1.9M UNI annualized burn vs 20M emission",
+        "zh": "确认年度净增发 +1810 万 UNI——尽管启动销毁,年化销毁量仅 190 万枚,远低于 2000 万枚排放"
+      },
+      {
+        "en": "Protocol TVL grew 4.12% over 7d to $4.09B while 24h volume collapsed to $11.64M (0.26% turnover)",
+        "zh": "协议 TVL 七日增长 4.12% 至 40.9 亿美元,但 24 小时交易量萎缩至 1164 万美元(换手率 0.26%)"
+      },
+      {
+        "en": "Derivatives market shows minimal conviction: OI only $36.88M (<1% of mcap) with neutral +0.01% funding",
+        "zh": "衍生品市场信心不足:未平仓合约仅 3688 万美元(不到市值 1%),资金费率中性(+0.01%)"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "Price holding $7.17 (20% above $5.96 treasury mark) with minimal seller pressure despite net inflation suggests large holders absorbed the dilution and aren't distributing. If Protocol Fee Expansion (Arc) passes and revenue doubles, burn could flip to net deflationary at current price - making this a pre-catalyst accumulation zone.",
+      "zh": "尽管净增发压力存在,价格仍守住 7.17 美元(较国库 5.96 美元成本溢价 20%)且抛压有限,说明大户已消化稀释且未分发。若 Arc 协议费扩展提案通过使收入翻倍,当前价格下的销毁量可转为净通缩——这或是催化剂前的吸筹区"
+    },
+    "watchNext": [
+      {
+        "en": "Arc protocol fee expansion vote - could materially increase revenue and burn rate",
+        "zh": "Arc 协议费扩展投票进展——可能实质性提升收入和销毁速率"
+      },
+      {
+        "en": "Net inflation crossover price: if UNI drops to ~$3.80, burn would equal emission (key technical level)",
+        "zh": "净增发平衡价:若 UNI 跌至约 3.80 美元,销毁量将与排放持平(关键技术位)"
+      },
+      {
+        "en": "Governance activity resumption - dormancy is a red flag for a token deriving value from optionality",
+        "zh": "治理活动恢复情况——对依赖期权价值的代币而言,治理沉寂是危险信号"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI trades at $7.18, 20% above the treasury's $5.96 implied fair value from the 100M token burn, but the headline is misleading. Despite fee switch activation and ongoing burns, UNI remains structurally inflationary: annual emission of 20M tokens far exceeds the 1.9M burned at current prices, creating net dilution of 18.1M UNI/year (+2.04%). This is the ceiling on price until one of three things happens: (1) price drops to ~$3.80 where burn equals emission, (2) protocol revenue doubles, or (3) real-yield staking passes governance. None are imminent. The bearish case is reinforced by anemic volume ($11.64M, just 0.26% of mcap) and governance dormancy - no active proposals, no movement on real yield. Derivatives traders show minimal conviction: OI is only $36.88M (<1% of mcap) with neutral funding. Trading above the DAO's own valuation mark without a catalyst is unsustainable. Yet the protocol itself is healthy: TVL up 4.12% to $4.09B, daily revenue stable at $242K. The Arc fee expansion proposal could materially improve burn math if passed. Price stability at $7+ despite net inflation suggests large holders aren't distributing, creating a narrow path where UNI consolidates here as a pre-catalyst accumulation zone - but only if Arc passes and revenue accelerates. Absent that, gravity wins.",
+      "zh": "UNI 报价 7.18 美元,较国库 1 亿枚代币销毁时隐含的 5.96 美元公允价值溢价 20%,但这一表象具有迷惑性。尽管费用开关已激活且销毁持续,UNI 在结构上仍为增发状态:年度 2000 万枚排放远超当前价格下 190 万枚的销毁量,造成每年净稀释 1810 万枚(+2.04%)。这构成价格天花板,除非三种情况之一发生:(1)价格跌至约 3.80 美元使销毁量与排放持平,(2)协议收入翻倍,(3)真实收益质押提案通过治理。目前三者均未临近。看跌逻辑因萎靡的交易量(1164 万美元,仅市值 0.26%)和治理沉寂而强化——无活跃提案,真实收益方案毫无进展。衍生品交易者信心不足:未平仓合约仅 3688 万美元(不到市值 1%),资金费率中性。在无催化剂情况下交易于 DAO 自身估值之上并非可持续。但协议本身健康:TVL 增长 4.12% 至 40.9 亿美元,日收入稳定在 24.2 万美元。Arc 协议费扩展提案若通过可能实质改善销毁数学。尽管净增发压力存在,价格在 7 美元以上的稳定性表明大户未在分发,这创造了狭窄路径:UNI 在此盘整作为催化剂前吸筹区——但前提是 Arc 通过且收入增长加速。若否,重力占优"
+    }
+  },
+  "savedAt": "2026-10-23T13:25:44.378Z"
+}
