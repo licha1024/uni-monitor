@@ -1,45 +1,45 @@
 {
   "snapshot": {
-    "timestamp": "2026-10-28T15:04:52.108Z",
-    "dateISO": "2026-10-28",
+    "timestamp": "2026-10-29T15:12:43.867Z",
+    "dateISO": "2026-10-29",
     "market": {
-      "priceUsd": 7.055,
-      "priceChange24hPct": -1.024130190796863,
-      "priceChange7dPct": -7.426846870489447,
-      "volume24hUsd": 6958092.722504941,
-      "marketCapUsd": 4395373129,
-      "fdvUsd": 6241322140,
+      "priceUsd": 7.347,
+      "priceChange24hPct": 4.07989800254994,
+      "priceChange7dPct": 3.888574660633489,
+      "volume24hUsd": 12636465.743728615,
+      "marketCapUsd": 4557249292,
+      "fdvUsd": 6471268150,
       "ath": 44.92,
-      "athChangePct": -84.31345
+      "athChangePct": -83.72909
     },
     "protocol": {
-      "tvlUsd": 3707792354,
-      "tvlChange7dPct": -11.097849056336152,
-      "fees24hUsd": 2830593,
-      "fees7dUsd": 14928724.389999999,
-      "revenue24hUsd": 240634,
-      "revenue7dUsd": 1414888,
-      "unichainTvlUsd": 26224974.00473441
+      "tvlUsd": 3760015000,
+      "tvlChange7dPct": -8.705850977586813,
+      "fees24hUsd": 2133268.08,
+      "fees7dUsd": 14491155.81,
+      "revenue24hUsd": 214722,
+      "revenue7dUsd": 1404120,
+      "unichainTvlUsd": 26320787.57740415
     },
     "onChain": {
       "totalSupply": 1000000000,
-      "circulatingSupply": 886680418.7861971,
-      "burnedTotal": 113319581.21380293,
+      "circulatingSupply": 886652418.7861971,
+      "burnedTotal": 113347581.21380293,
       "treasuryBalance": 262247996.305835,
       "top10ConcentrationPct": null,
       "newBurns24h": null
     },
     "derivatives": {
-      "openInterestUsd": 36068304.646,
-      "fundingRatePct": 0.00527946044119,
-      "longShortRatio": 2.25,
+      "openInterestUsd": 41638948.912,
+      "fundingRatePct": 0.01,
+      "longShortRatio": 1.88,
       "liquidations24hUsd": null
     },
     "crossMarket": {
-      "ethPriceUsd": 2332.91,
-      "uniEthRatio": 0.003024120090359251,
-      "btcDominance": 59.46367197502259,
-      "defiTvlUsd": 88443981317.20906
+      "ethPriceUsd": 2357.14,
+      "uniEthRatio": 0.003116912868985296,
+      "btcDominance": 59.54611341865005,
+      "defiTvlUsd": 88230369895.03514
     },
     "governance": {
       "activeProposals": [],
@@ -55,47 +55,47 @@
   },
   "analysis": {
     "headline": {
-      "en": "UNI trades 18% above DAO's $5.96 burn anchor but bleeds 2% annually through net inflation; TVL's 11% weekly drop signals broader DeFi rotation.",
-      "zh": "UNI 价格较 DAO 回购成本 $5.96 溢价 18%,但年化净通胀仍达 2%;TVL 单周暴跌 11% 预示 DeFi 资金外流。"
+      "en": "UNI holds above $5.96 treasury anchor despite 2.06% net inflation and TVL bleeding 8.71% weekly.",
+      "zh": "UNI守住5.96美元金库锚定价，但净通胀率2.06%且TVL单周流失8.71%。"
     },
     "stance": "neutral",
     "confidence": "medium",
     "keyChanges": [
       {
-        "en": "TVL collapsed 11.1% in 7 days to $3.71B — sharpest weekly decline in recent months, indicating capital exodus from Uniswap.",
-        "zh": "TVL 七天内暴跌 11.1% 至 37.1 亿美元,为近月最大单周跌幅,反映资金正在撤离 Uniswap。"
+        "en": "Price rallied +4.08% to $7.35, breaking above the $5.96 treasury burn cost anchor established during the 100M token burn.",
+        "zh": "价格上涨4.08%至7.35美元，突破金库1亿代币销毁时确立的5.96美元成本锚定。"
       },
       {
-        "en": "Net inflation persists at +2.06%/year: 20M UNI annual emission vs only 1.78M burned at current $7.05 price — buyback can't neutralize dilution.",
-        "zh": "年化净通胀率 +2.06%:年释放 2000 万 UNI,但当前价格下仅能回购销毁 178 万枚,稀释无法抵消。"
+        "en": "TVL collapsed -8.71% in 7 days to $3.76B while protocol revenue held stable at $1.40M weekly, signaling capital rotation despite usage.",
+        "zh": "TVL七日暴跌8.71%至37.6亿美元，但协议周收入稳定在140万美元，显示资金外流但使用量未崩。"
       },
       {
-        "en": "Price at $7.05 holds 18% premium over DAO's $5.96 treasury burn cost basis but down 7.43% this week amid 59.46% BTC dominance.",
-        "zh": "价格 $7.05 较 DAO 国库回购成本 $5.96 溢价 18%,但本周下跌 7.43%,BTC 市值占比升至 59.46% 压制山寨币。"
+        "en": "Net inflation persists at +2.06%/year: $12.45M annual buyback burns only 1.69M UNI at $7.35, leaving 18.3M UNI net emission.",
+        "zh": "净通胀率维持+2.06%/年：年度回购预算1245万美元在当前价格仅能销毁169万枚，净增发1830万枚。"
       }
     ],
     "contrarianObservation": {
-      "en": "Long/Short ratio of 2.25 with near-zero funding (+0.01%) suggests perp traders are positioned long WITHOUT overleveraging — unlike late 2023's high-funding setups before dumps. If this is patient accumulation above the $5.96 floor rather than retail euphoria, the next move could be an upside squeeze, not capitulation.",
-      "zh": "多空比 2.25 但资金费率接近零(+0.01%)意味着永续合约多头建仓但未过度加杠杆,与 2023 年末高费率见顶前不同。若这是聪明钱在 $5.96 底部上方耐心吸筹而非散户狂热,下一步可能是向上挤压而非投降式下跌。"
+      "en": "The 1.88 long/short ratio may not be retail stupidity—it could be informed front-running of Arc fee expansion (potentially +20-30% revenue) and the looming real-yield governance vote, which would obsolete current net-inflation math by converting burns into staker yields.",
+      "zh": "1.88的多空比未必是散户盲目做多，可能是聪明钱提前布局Arc费用扩展（收入或增20-30%）及即将到来的真实收益治理投票，后者将使当前净通胀逻辑失效，转为质押收益模式。"
     },
     "watchNext": [
       {
-        "en": "TVL trajectory — if the 11% weekly bleed continues, it confirms sustained capital rotation out of DeFi/Uniswap into other ecosystems.",
-        "zh": "TVL 走势 — 若 11% 周跌幅持续,将确认资金正持续性流出 DeFi/Uniswap 转向其他生态。"
+        "en": "Arc protocol fee expansion temp check outcome—passage could lift annual revenue to $90M+ and increase burn capacity by 30%.",
+        "zh": "Arc协议费用扩展温度检查结果——若通过可将年收入提升至9000万美元以上，回购销毁能力增30%。"
       },
       {
-        "en": "Governance forum activity on real yield RFC — THE catalyst that shifts UNI from reflexive (PE-multiple) to cash-flow (DCF) valuation regime.",
-        "zh": "治理论坛关于真实收益 RFC 的动态 — 这是将 UNI 从反身性估值(市盈率倍数)切换到现金流估值(DCF)的核心催化剂。"
+        "en": "TVL stabilization or further decline—another -8% week would break the 'strong usage despite bleeding capital' narrative.",
+        "zh": "TVL企稳或继续下跌——若再跌8%将击破「资金流出但使用强劲」的叙事。"
       },
       {
-        "en": "Net inflation sensitivity — if price drops toward $6, buyback efficiency improves (more UNI burned per dollar); watch for this reflexive stabilizer.",
-        "zh": "净通胀敏感度 — 若价格跌向 $6,回购效率提升(单位美元销毁更多 UNI);关注这一反身性稳定机制。"
+        "en": "UNI/ETH ratio defense of 0.003—if ETH rallies and ratio breaks down, absolute USD gains become meaningless.",
+        "zh": "UNI/ETH比率能否守住0.003——若ETH反弹而比率失守，美元价格上涨将变得无意义。"
       }
     ],
     "fullReasoning": {
-      "en": "UNI is trapped in valuation limbo. At $7.05, it trades 18% above the DAO's own fair value anchor ($5.96 treasury burn cost), yet protocol mechanics still impose 2% annual dilution: 20M UNI emission vs only 1.78M burned at current price. The protocol itself is healthy — $73.8M annualized revenue, $3.71B TVL — but TVL's brutal 11% weekly drop is the week's most alarming signal, suggesting capital is rotating out of DeFi as BTC dominance hits 59.46%. Derivatives positioning is fascinating: Long/Short ratio of 2.25 shows conviction, yet funding rate sits at +0.01% (nearly neutral), meaning longs aren't overleveraged. This could represent patient accumulation above the psychological $5.96 floor rather than euphoric retail froth. The core problem remains unchanged: for net deflation at $7.05, UNI needs either a 75% protocol revenue surge or emissions cut via governance. Neither is imminent. Governance forum shows scattered activity (token policies, v4 hooks, vault security) but no momentum on the real yield RFC that would fundamentally shift UNI's valuation regime from reflexive to cash-flow based. The 7-day price decline confirms broader alt weakness. Without near-term catalysts and ongoing net inflation, neutral is warranted. Confidence is medium because protocol fundamentals are transparent but governance timing — the key variable — remains opaque, and TVL's sharp reversal could stabilize or accelerate.",
-      "zh": "UNI 陷入估值真空地带。当前价格 $7.05 较 DAO 自身公允价值锚点($5.96 国库回购成本)溢价 18%,但协议机制仍在施加年化 2% 的稀释:年释放 2000 万 UNI,当前价格下仅能销毁 178 万枚。协议本身健康 — 年化收入 7380 万美元、TVL 37.1 亿美元 — 但 TVL 单周暴跌 11% 是本周最危险的信号,暗示资金正在撤出 DeFi,BTC 市值占比升至 59.46% 加剧山寨币压力。衍生品仓位耐人寻味:多空比 2.25 显示多头信念,但资金费率仅 +0.01%(几乎中性),意味着多头未过度加杠杆。这可能代表聪明钱在 $5.96 心理底部上方耐心建仓,而非散户狂热泡沫。核心问题未变:在 $7.05 实现净通缩需要协议收入增长 4 倍或通过治理削减释放,两者均非近期可能。治理论坛显示零散活动(代币政策、v4 钩子、金库安全)但真实收益 RFC 无实质进展,而后者是将 UNI 估值体系从反身性切换到现金流基础的根本性转折。七日跌幅确认山寨币普遍疲弱。缺乏近期催化剂且持续净通胀,中性立场合理。信心评级为中等,因协议基本面透明但治理时机(关键变量)不透明,且 TVL 的急剧逆转可能企稳或加速恶化。"
+      "en": "UNI trades at $7.35, holding above the $5.96 treasury burn anchor that marks the DAO's implicit fair value floor. The +4.08% daily rally occurs against hostile headwinds: BTC dominance at 59.55% (risk-off for alts) and TVL hemorrhaging -8.71% weekly. This divergence suggests deliberate spot accumulation rather than momentum chasing. Yet protocol revenue remains robust at $1.40M weekly, indicating fee capture efficiency even as liquidity migrates elsewhere. The core structural problem persists: at current price, the $12.45M annual buyback budget burns only 1.69M UNI, leaving 18.3M net emission (+2.06%/year). Counterintuitively, price strength worsens tokenomics—the fixed-dollar buyback burns fewer tokens at higher prices, creating a reflexive ceiling. The derivatives market shows a 1.88 long/short ratio with minimal $41.6M open interest (0.9% of market cap), suggesting either retail positioning or low-conviction accumulation. Critically, the Arc fee expansion proposal could shift the equation: a 20-30% revenue boost would increase buyback capacity to $15M+, narrowing net inflation even at $8-9. Combined with the potential governance pivot to redirect buybacks from burns to staker rewards (transforming UNI into a cash-flow asset), current net-inflation concerns may be backward-looking. The market appears to be in price discovery, waiting for governance catalysts to clarify UNI's terminal regime. Neutral stance with medium confidence: bullish on treasury anchor hold and spot bid, bearish on net inflation math and TVL bleed.",
+      "zh": "UNI交易于7.35美元，守住了金库5.96美元的销毁成本锚定，这是DAO对公允价值的隐含底线。日涨4.08%发生在逆风环境中：BTC市占率59.55%（山寨币风险规避）且TVL单周暴跌8.71%。这种背离表明是主动现货吸筹而非追涨行为。然而协议周收入维持在140万美元的强劲水平，说明即使流动性外迁，费用捕获效率依然健康。核心结构性问题仍在：当前价格下，1245万美元年度回购预算仅能销毁169万枚UNI，净增发1830万枚（+2.06%/年）。反直觉的是，价格上涨反而恶化代币经济学——固定美元回购在高价时销毁更少代币，形成自反性天花板。衍生品市场显示1.88多空比，但持仓量仅4160万美元（市值的0.9%），暗示要么是散户定位，要么是低确信度建仓。关键在于，Arc费用扩展提案可能改变等式：收入增长20-30%将使回购能力提升至1500万美元以上，即使价格在8-9美元也能缩小净通胀缺口。结合潜在的治理转向——将回购从销毁改为质押奖励（将UNI转化为现金流资产），当前净通胀担忧可能是后视镜分析。市场似乎处于价格发现阶段，等待治理催化剂明确UNI的最终形态。中性立场，中等信心：看好金库锚定守住和现货买盘，看空净通胀数学和TVL流失。"
     }
   },
-  "savedAt": "2026-10-28T15:06:06.917Z"
+  "savedAt": "2026-10-29T15:14:05.248Z"
 }
