@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-03T16:13:30.883Z",
+    "dateISO": "2026-11-03",
+    "market": {
+      "priceUsd": 7.322,
+      "priceChange24hPct": 1.6662038322688157,
+      "priceChange7dPct": 3.2576505429417555,
+      "volume24hUsd": 19016534.2874232,
+      "marketCapUsd": 4433355116,
+      "fdvUsd": 6478182793,
+      "ath": 44.92,
+      "athChangePct": -83.73579
+    },
+    "protocol": {
+      "tvlUsd": 3558918708,
+      "tvlChange7dPct": -5.606943742163632,
+      "fees24hUsd": 1739150.06,
+      "fees7dUsd": 25150320.069999997,
+      "revenue24hUsd": 185571,
+      "revenue7dUsd": 2856075,
+      "unichainTvlUsd": 25730511.41172256
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 886300418.7861971,
+      "burnedTotal": 113699581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 47599011.589,
+      "fundingRatePct": 0.01,
+      "longShortRatio": 1.97,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 2291.33,
+      "uniEthRatio": 0.00319552399697992,
+      "btcDominance": 59.24520508794105,
+      "defiTvlUsd": 82417997930.38785
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)",
+        "[Discussion] Should v4 hooks on Robinhood Chain standardize session-aware pricing? (https://gov.uniswap.org/t/discussion-should-v4-hooks-on-robinhood-chain-standardize-session-aware-pricing/26297)",
+        "[Temp Check] Protocol Fee Expansion: Arc (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-arc/26287)",
+        "[Temp Check] Rotate Sentinel Addresses on the DUNI-Owned Uniswap Earn Vaults (https://gov.uniswap.org/t/temp-check-rotate-sentinel-addresses-on-the-duni-owned-uniswap-earn-vaults/26281)",
+        "[RFC] Web4 Autonomous State Engines on Unichain: Utilizing ERC-6551 & Sovereign ERC-721 Force Transfers for Dynamic Asset Orchestration (https://gov.uniswap.org/t/rfc-web4-autonomous-state-engines-on-unichain-utilizing-erc-6551-sovereign-erc-721-force-transfers-for-dynamic-asset-orchestration/26229)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "UNI holds above treasury anchor at $7.32 but net inflation persists at +1.87%/year with no catalyst in sight",
+      "zh": "UNI 守住国库锚定价 $7.32，但年化净通胀率仍达 +1.87%，且缺乏催化剂"
+    },
+    "stance": "neutral",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "Net emission remains +16.54M UNI/year as annualized burns (3.46M) cover only 17% of fixed 20M annual issuance",
+        "zh": "年化净增发 +1654 万枚 UNI，回购销毁(346 万枚)仅覆盖固定 2000 万枚年发行量的 17%"
+      },
+      {
+        "en": "TVL declined -5.61% to $3.56B over 7 days while price gained +3.26%, signaling capital flight amid speculative positioning",
+        "zh": "7 日内 TVL 下跌 -5.61% 至 35.6 亿美元，而币价上涨 +3.26%，显示资金外流与投机性持仓并存"
+      },
+      {
+        "en": "Long/short account ratio at 1.97 shows retail crowding the long side with $47.6M open interest and +0.01% funding",
+        "zh": "多空账户比 1.97 显示散户扎堆做多，持仓量 4760 万美元，资金费率 +0.01%"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "Price holding $7+ despite ongoing dilution and zero governance progress suggests sophisticated accumulation; market may be front-running a Q1 2026 real-yield proposal that insiders expect to pass, which would convert $148M annualized revenue into ~7.4% staking yield at 100M UNI staked",
+      "zh": "尽管持续增发且治理无进展，币价仍守住 $7 以上或暗示机构吸筹；市场可能提前布局 2026 年 Q1 真实收益提案(内部预期通过)，届时 1.489 亿美元年化收益可转化为约 7.4% 质押收益率(按 1 亿枚质押计)"
+    },
+    "watchNext": [
+      {
+        "en": "Any RFC advancement on real-yield staking distribution—this is the only catalyst that shifts UNI from reflexive to DCF valuation",
+        "zh": "真实收益质押分配 RFC 的任何推进——这是唯一能让 UNI 从反射性估值转向现金流贴现估值的催化剂"
+      },
+      {
+        "en": "Net emission crossover threshold: if UNI drops to ~$4, burn rate would exceed issuance and flip the inflation narrative",
+        "zh": "净增发交叉点阈值：若 UNI 跌至约 $4，销毁率将超过增发率并扭转通胀叙事"
+      },
+      {
+        "en": "TVL trend persistence—another -5% weekly decline would confirm capital flight and invalidate the accumulation thesis",
+        "zh": "TVL 趋势延续性——若再出现周跌 -5%，将确认资金外流并否定吸筹假设"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI trades in a narrow equilibrium where modest price strength (+3.26% weekly to $7.32) collides with structural inflation headwinds. The core problem remains unresolved: despite the buyback-and-burn narrative, UNI dilutes holders by 1.87% annually because 20M token issuance vastly exceeds the 3.46M annualized burn rate at current prices. This gap won't close unless price collapses to $4 or protocol revenue quintuples. The divergence between declining TVL (-5.61% to $3.56B) and rising price suggests retail speculation rather than fundamental demand, especially with volume anemic at $19M/24h. Yet price holds firmly above the $5.96 treasury burn anchor—the DAO's own fair-value mark—and derivatives show no panic (neutral funding, moderate OI). The long/short ratio of 1.97 indicates retail crowding but isn't extreme. The market appears frozen, waiting for the real-yield staking RFC to advance through governance. Without that catalyst, UNI remains a reflexive governance token oscillating in a range, not a cash-flow asset worth aggressive positioning. Current premium to treasury anchor lacks fundamental justification but hasn't collapsed either—hence neutral stance until governance breaks the deadlock or TVL decline accelerates.",
+      "zh": "UNI 处于狭窄均衡中，适度价格强势(周涨 +3.26% 至 $7.32)与结构性通胀阻力对冲。核心问题未解：尽管回购销毁叙事盛行，UNI 仍以年化 1.87% 稀释持币者，因 2000 万枚固定增发远超当前价格下 346 万枚的年化销毁量。除非币价崩至 $4 或协议收入暴增 5 倍，否则缺口无法弥合。TVL 下跌(-5.61% 至 35.6 亿美元)与币价上涨背离，显示散户投机而非基本面需求，尤其日交易量仅 1900 万美元的贫弱表现。然而价格稳守 $5.96 国库销毁锚定价(DAO 自身标记的公允价值)，衍生品未见恐慌(资金费率中性、持仓量适中)。多空账户比 1.97 显示散户扎堆但非极端。市场似乎冻结，等待真实收益质押 RFC 在治理中推进。缺乏该催化剂，UNI 仍是在区间震荡的反射性治理代币，而非值得激进布局的现金流资产。当前对国库锚定价的溢价缺乏基本面支撑，但也未崩溃——因此维持中性立场，直到治理打破僵局或 TVL 下跌加速。"
+    }
+  },
+  "savedAt": "2026-11-03T16:14:33.490Z"
+}
