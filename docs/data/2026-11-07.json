@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-07T14:53:05.372Z",
+    "dateISO": "2026-11-07",
+    "market": {
+      "priceUsd": 7.074,
+      "priceChange24hPct": -0.2819283901888985,
+      "priceChange7dPct": 0.8410548823948705,
+      "volume24hUsd": 7948646.451090091,
+      "marketCapUsd": 4306429456,
+      "fdvUsd": 6277696396,
+      "ath": 44.92,
+      "athChangePct": -84.22799
+    },
+    "protocol": {
+      "tvlUsd": 3574383160,
+      "tvlChange7dPct": -1.3866555759973915,
+      "fees24hUsd": 1794191.4300000002,
+      "fees7dUsd": 14660835.42,
+      "revenue24hUsd": 180191,
+      "revenue7dUsd": 1620209,
+      "unichainTvlUsd": 25171280.05171224
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 886148418.7861971,
+      "burnedTotal": 113851581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 44219712.168,
+      "fundingRatePct": 0.00483656893326,
+      "longShortRatio": 2.53,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 2245.4,
+      "uniEthRatio": 0.0031504409013984143,
+      "btcDominance": 59.29188253348031,
+      "defiTvlUsd": 81176087754.83789
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "[RFC] Upgrade VolatilePair hook and update X Layer releaser (https://gov.uniswap.org/t/rfc-upgrade-volatilepair-hook-and-update-x-layer-releaser/26337)",
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)",
+        "[Discussion] Should v4 hooks on Robinhood Chain standardize session-aware pricing? (https://gov.uniswap.org/t/discussion-should-v4-hooks-on-robinhood-chain-standardize-session-aware-pricing/26297)",
+        "[Temp Check] Protocol Fee Expansion: Arc (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-arc/26287)",
+        "[Temp Check] Rotate Sentinel Addresses on the DUNI-Owned Uniswap Earn Vaults (https://gov.uniswap.org/t/temp-check-rotate-sentinel-addresses-on-the-duni-owned-uniswap-earn-vaults/26281)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "UNI trades above treasury cost but remains net inflationary—volume dead, governance silent on real-yield catalyst.",
+      "zh": "UNI 价格高于国库成本基准但仍处净通胀状态——交易量死寂,治理层对真实收益转型保持沉默。"
+    },
+    "stance": "neutral",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "Net emission still positive: burning only 2.03M UNI/year vs 20M emission = +2.03% annual dilution despite burn narrative.",
+        "zh": "净增发仍为正值:年化销毁仅203万枚 UNI vs 2000万枚增发 = +2.03%年化稀释,销毁叙事名不副实。"
+      },
+      {
+        "en": "24h volume collapsed to $7.95M (0.18% of market cap)—interest completely absent, no directional conviction.",
+        "zh": "24小时交易量暴跌至795万美元(市值的0.18%)——市场兴趣完全缺失,无方向性判断。"
+      },
+      {
+        "en": "Long/short ratio at 2.53 shows retail heavily positioned long while price stagnates—classic fade signal.",
+        "zh": "多空比达2.53显示散户重仓做多而价格停滞——典型的反向信号。"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "Everyone fixates on the net inflation problem, but $7.07 already prices an 18.6% premium to the DAO's treasury burn cost ($5.96). The market is quietly betting on improved tokenomics. If real-yield governance passes, that premium could explode—the setup is asymmetric upside disguised as drift.",
+      "zh": "所有人都盯着净通胀问题,但$7.07已经相对DAO国库销毁成本($5.96)溢价18.6%。市场正在悄悄押注代币经济学改善。若真实收益治理提案通过,溢价可能暴涨——这是伪装成横盘的非对称上涨结构。"
+    },
+    "watchNext": [
+      {
+        "en": "Governance forum activity on real-yield RFC—the only catalyst that structurally matters for UNI valuation regime shift.",
+        "zh": "治理论坛关于真实收益 RFC 的活动——唯一能引发 UNI 估值体系结构性转变的催化剂。"
+      },
+      {
+        "en": "Net inflation crossover point: need UNI above ~$10.70 for buybacks to exceed emissions at current protocol revenue.",
+        "zh": "净通胀转折点:按当前协议收入,需 UNI 突破~$10.70 才能使回购量超过增发量。"
+      },
+      {
+        "en": "Treasury activity signals—any acceleration in buyback % allocation or second wave burn from the 262M UNI reserve.",
+        "zh": "国库动向信号——回购比例分配的任何加速,或从2.62亿枚 UNI 储备中进行的第二波销毁。"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI is trapped in structural limbo at $7.07, trading 18.6% above the DAO's treasury burn cost basis ($5.96) but lacking conviction—24h volume of $7.95M (0.18% turnover) reveals total disinterest. The deflationary narrative is mathematically false: $84.48M annualized protocol revenue funds 17% buybacks purchasing only 2.03M UNI/year against 20M fixed emissions, leaving +2.03% net annual inflation. This hidden dilution explains price stagnation despite burn headlines. Derivatives show no edge: 0.00% funding, $44M OI (anemic), though 2.53 long/short ratio flags retail overpositioned without follow-through. Most critically, governance is silent on real-yield pivot (redirecting buybacks to stakers)—forum shows only operational threads, no structural catalyst discussion. TVL contracted 1.39% to $3.57B over 7 days, not collapsing but not growing. Price sits between distressed-selling zone ($3-3.5) and institutional re-accumulation range ($9-12 where inflation could flip). Bear case: 6-12 month drift as emissions grind lower. Bull case: requires governance action the DAO isn't prioritizing. Neutral until something breaks—volume, governance, or net inflation math.",
+      "zh": "UNI 在$7.07陷入结构性僵局,相对DAO国库销毁成本基准($5.96)溢价18.6%但缺乏市场信念——24小时交易量795万美元(0.18%换手率)暴露出彻底的冷漠。通缩叙事在数学上是虚假的:8448万美元年化协议收入支持17%回购,年化仅能购回203万枚 UNI,对比2000万枚固定增发,留下+2.03%年化净通胀。这一隐藏的稀释性解释了为何价格在销毁新闻下停滞不前。衍生品数据毫无方向性:资金费率0.00%,持仓量4420万美元(极低),尽管2.53多空比显示散户过度做多却无后续推动。最关键的是,治理层对真实收益转型(将回购重定向至质押者)保持沉默——论坛仅显示运营性议题,无结构性催化剂讨论。TVL 7日内收缩1.39%至35.7亿美元,未崩溃但未增长。价格位于恐慌抛售区($3-3.5)和机构重新吸筹区间($9-12,此价位通胀可能转正)之间。看空情景:6-12个月横盘震荡,增发持续压低价格。看涨情景:需要DAO当前未优先处理的治理行动。保持中性直至交易量、治理或净通胀数学发生突破。"
+    }
+  },
+  "savedAt": "2026-11-07T14:54:16.557Z"
+}
