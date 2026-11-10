@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-10T16:24:22.444Z",
+    "dateISO": "2026-11-10",
+    "market": {
+      "priceUsd": 6.786,
+      "priceChange24hPct": -1.694915254237288,
+      "priceChange7dPct": -11.548488008342025,
+      "volume24hUsd": 16205917.170261176,
+      "marketCapUsd": 4140964943,
+      "fdvUsd": 6036758751,
+      "ath": 44.92,
+      "athChangePct": -84.83185
+    },
+    "protocol": {
+      "tvlUsd": 3356014653,
+      "tvlChange7dPct": -5.6350556542230565,
+      "fees24hUsd": 2100862,
+      "fees7dUsd": 14675810.07,
+      "revenue24hUsd": 249743,
+      "revenue7dUsd": 1693463,
+      "unichainTvlUsd": 24187619.192734905
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 886054418.7861971,
+      "burnedTotal": 113945581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 39959164.208,
+      "fundingRatePct": 0.0037412769352000003,
+      "longShortRatio": 2.55,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 2029.74,
+      "uniEthRatio": 0.00334328534689172,
+      "btcDominance": 59.72144196410921,
+      "defiTvlUsd": 77931799578.45052
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "[RFC] Upgrade VolatilePair hook and update X Layer releaser (https://gov.uniswap.org/t/rfc-upgrade-volatilepair-hook-and-update-x-layer-releaser/26337)",
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)",
+        "[Discussion] Should v4 hooks on Robinhood Chain standardize session-aware pricing? (https://gov.uniswap.org/t/discussion-should-v4-hooks-on-robinhood-chain-standardize-session-aware-pricing/26297)",
+        "[Temp Check] Protocol Fee Expansion: Arc (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-arc/26287)",
+        "[Temp Check] Rotate Sentinel Addresses on the DUNI-Owned Uniswap Earn Vaults (https://gov.uniswap.org/t/temp-check-rotate-sentinel-addresses-on-the-duni-owned-uniswap-earn-vaults/26281)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "Net inflation persists at 2.01%/year despite burns; TVL decline signals fee compression ahead with no governance catalyst in sight.",
+      "zh": "尽管回购销毁,净通胀仍达2.01%/年;TVL下跌预示费用将承压,治理层面缺乏催化剂。"
+    },
+    "stance": "bearish",
+    "confidence": "high",
+    "keyChanges": [
+      {
+        "en": "Net inflation confirmed at +2.01%/year: buybacks burn 2.21M UNI versus 20M emitted annually at current $6.78 price.",
+        "zh": "净通胀率确认为+2.01%/年:按当前6.78美元价格,年回购销毁221万枚UNI,而年排放2000万枚。"
+      },
+      {
+        "en": "TVL declined 5.64% over 7 days to $3.36B, a leading indicator that typically precedes fee compression.",
+        "zh": "TVL七日跌5.64%至33.6亿美元,这一领先指标通常预示费用收入将跟随下滑。"
+      },
+      {
+        "en": "Long/short ratio 2.55 with 0% funding rate suggests overleveraged positioning vulnerable to liquidation cascade below $6.50.",
+        "zh": "多空比2.55且资金费率0%,显示多头持仓过度拥挤,跌破6.50美元可能引发清算踩踏。"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "The net inflation gap is only 17.8M UNI annually. An 18% increase in protocol revenue (achievable via Unichain, v4 hooks, new chain deployments) would flip UNI to net deflationary WITHOUT requiring real-yield governance to pass. The market prices in permanent inflation when the operational fix is closer than it appears.",
+      "zh": "净通胀缺口年仅1780万枚UNI。协议收入只需增长18%(通过Unichain、v4 hooks、新链部署完全可达成),即可扭转为净通缩,无需等待real-yield治理提案通过。市场定价为永久通胀,但运营层面的解决方案比看起来更近。"
+    },
+    "watchNext": [
+      {
+        "en": "Protocol revenue trend: needs 18%+ growth to flip from net inflation to net deflation at current price levels.",
+        "zh": "协议收入趋势:需增长18%以上才能在当前价格下从净通胀转为净通缩。"
+      },
+      {
+        "en": "Real-yield RFC advancement (or prolonged silence) in governance forums as indicator of structural catalyst timing.",
+        "zh": "Real-yield RFC在治理论坛的推进情况(或持续沉寂),作为结构性催化剂时机的指标。"
+      },
+      {
+        "en": "$5.96 treasury burn anchor as critical technical support if current $6.70-$6.80 level breaks on volume.",
+        "zh": "5.96美元财库回购锚定价作为关键技术支撑,若当前6.70-6.80美元位在放量中跌破需重点关注。"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI sits in a precarious equilibrium. At $6.78, it holds above the $5.96 treasury burn anchor but shows technical weakness with an 11.55% weekly decline. The central problem remains unresolved: despite the fee switch and burns, UNI is still net inflationary by 2.01% annually. The protocol generates $88M in annualized revenue, but only 17% flows to buybacks ($15M), which at current price burns just 2.2M UNI against 20M annual emissions. This is a structural valuation ceiling until fixed. TVL declining 5.64% weekly compounds the concern—fee compression typically follows. With no active governance proposals advancing the real-yield RFC, UNI remains stuck between asset classes: too dilutive to be a cash-flow play, too protocol-dependent to be pure governance. The long/short ratio of 2.55 with neutral funding suggests overleveraged positioning that could cascade lower. Macro headwinds persist with BTC dominance at 59.72%, pulling capital from alts. The $5.96-$6.00 zone becomes critical support. Without either revenue growth to flip net emissions or a real-yield governance catalyst, downside risk dominates.",
+      "zh": "UNI当前处于脆弱平衡。价格6.78美元虽高于财库回购锚定价5.96美元,但周跌11.55%显示技术面承压。核心问题未解:尽管开启费用开关并回购销毁,UNI仍然净通胀2.01%/年。协议年化收入8830万美元,但仅17%用于回购(1501万美元),按当前价格仅能销毁221万枚,远低于2000万枚年排放量。这是估值天花板,不解决就无法突破。TVL周跌5.64%更令人担忧——通常预示费用收入将跟随下滑。治理层面无实质进展推动real-yield RFC,UNI卡在两类资产之间:通胀率过高无法作为现金流资产,对协议依赖过重又不是纯治理代币。多空比2.55且资金费率为零,说明多头持仓过度拥挤,存在踩踏风险。宏观层面BTC占比59.72%,资金持续流出山寨币。5.96-6.00美元区间成为关键支撑。除非收入增长扭转净排放或治理催化剂落地,否则下行风险占主导。"
+    }
+  },
+  "savedAt": "2026-11-10T16:25:22.669Z"
+}
