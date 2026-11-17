@@ -1,0 +1,117 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-17T17:36:52.267Z",
+    "dateISO": "2026-11-17",
+    "market": {
+      "priceUsd": 5.26,
+      "priceChange24hPct": 2.754444227388162,
+      "priceChange7dPct": -19.275629220380605,
+      "volume24hUsd": 12295053.966443347,
+      "marketCapUsd": 3185872226,
+      "fdvUsd": 4645063745,
+      "ath": 44.92,
+      "athChangePct": -88.32508
+    },
+    "protocol": {
+      "tvlUsd": 3027515794,
+      "tvlChange7dPct": -8.289215852219067,
+      "fees24hUsd": 1565303.9300000002,
+      "fees7dUsd": 13661291.18,
+      "revenue24hUsd": 174623,
+      "revenue7dUsd": 1737226,
+      "unichainTvlUsd": 22437073.433888376
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 885786418.7861971,
+      "burnedTotal": 114213581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 30126771.974,
+      "fundingRatePct": -0.0030974901916799996,
+      "longShortRatio": 1.72,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 1779.6,
+      "uniEthRatio": 0.002955720386603731,
+      "btcDominance": 58.35057947714598,
+      "defiTvlUsd": 70719115682.89711
+    },
+    "governance": {
+      "activeProposals": [
+        {
+          "title": "Protocol Fee Expansion: v4 on Five More Chains",
+          "status": "active",
+          "url": "https://snapshot.box/#/s:uniswapgovernance.eth/proposal/0x28780882407a7a45326f0d72a036c02cb4a48591813d7847afd87e30e8e17f8c"
+        },
+        {
+          "title": "Upgrade the v4 Protocol Fee Adapter",
+          "status": "active",
+          "url": "https://snapshot.box/#/s:uniswapgovernance.eth/proposal/0x65503933c85b5c813a350603a6f4be143e911f073ae17ff109aa978f494ae4bc"
+        },
+        {
+          "title": "Upgrade VolatilePair hook and update X Layer Releaser",
+          "status": "active",
+          "url": "https://snapshot.box/#/s:uniswapgovernance.eth/proposal/0xd010fad9c1abd897c165f2ff93cee3d321251330c977cb354bb59ddf3ae713df"
+        }
+      ],
+      "recentDiscussion": [
+        "[Temp Check] Protocol Fee Expansion: v4 on Five More Chains (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-v4-on-five-more-chains/26349)",
+        "[Temp Check] Upgrade the v4 Protocol Fee System (https://gov.uniswap.org/t/temp-check-upgrade-the-v4-protocol-fee-system/26348)",
+        "[Temp Check] Upgrade VolatilePair hook and update X Layer Releaser (https://gov.uniswap.org/t/temp-check-upgrade-volatilepair-hook-and-update-x-layer-releaser/26337)",
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)",
+        "[Discussion] Should v4 hooks on Robinhood Chain standardize session-aware pricing? (https://gov.uniswap.org/t/discussion-should-v4-hooks-on-robinhood-chain-standardize-session-aware-pricing/26297)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "Fee expansion momentum can't overcome net inflation math; needs $4 retest or 30% revenue surge to clear structural overhang",
+      "zh": "费用扩张动能无法克服净通胀困境；需跌至4美元或收入增长30%才能突破结构性压制"
+    },
+    "stance": "bearish",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "7-day crash of 19.28% pushed price to $5.26, just 11.7% below the treasury's $5.96 burn anchor—a discount to the DAO's own valuation mark",
+        "zh": "7日暴跌19.28%至5.26美元，仅比财政部5.96美元回购锚点低11.7%——已低于DAO自身估值基准"
+      },
+      {
+        "en": "Net inflation persists at +1.93%/year: 20M UNI emissions dwarf 2.93M annualized burn despite buyback narrative",
+        "zh": "净通胀率仍为+1.93%/年：2000万UNI年度增发远超293万年化销毁量，回购叙事名不副实"
+      },
+      {
+        "en": "Governance velocity spiked with 3 active v4 expansion votes targeting 5 new chains, but real-yield RFC remains stalled in forum stage",
+        "zh": "治理活跃度激增，3项v4扩张提案投票中目标新增5条链，但实际收益分配RFC仍停留在论坛讨论阶段"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "While net inflation looks damning, v4's imminent deployment to 5+ L2s could trigger non-linear revenue growth (L2 throughput >> mainnet); if protocol revenue jumps 20% within 8 weeks, burn/emission equilibrium flips at current price—governance activity suggests this is closer than the market prices",
+      "zh": "尽管净通胀数据堪忧，但v4即将部署至5+条L2可能引发非线性收入增长(L2吞吐量>>主网)；若协议收入在8周内增长20%，当前价格下销毁/增发比将实现平衡——治理活动暗示这一转变比市场定价的更近"
+    },
+    "watchNext": [
+      {
+        "en": "Real-yield RFC progression: monitor if staking proposal exits forum and reaches Snapshot—the only catalyst that fundamentally revalues UNI",
+        "zh": "实际收益RFC进展：关注质押提案是否离开论坛进入Snapshot投票——唯一能从根本上重估UNI的催化剂"
+      },
+      {
+        "en": "Weekly protocol revenue crossing $2M sustained: current $1.74M needs 15% lift to signal v4 expansion is working",
+        "zh": "周度协议收入突破200万美元并持续：当前174万需提升15%以验证v4扩张生效"
+      },
+      {
+        "en": "$5.00 price floor test: break below means retest of $4.00-4.50 institutional accumulation zone; hold confirms local bottom",
+        "zh": "5美元价格支撑测试：跌破则重测4.00-4.50美元机构建仓区；守住则确认局部底部"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI's 19% weekly collapse to $5.26 reflects the market pricing in structural reality: the protocol is net inflationary by 1.93%/year. At $5.26, the $15.4M annualized buyback budget burns only 2.93M UNI against 20M in fixed emissions. This isn't temporary—it's math. The treasury's $5.96 burn anchor shows even the DAO marked fair value 13% higher, yet price can't hold. Volume at $12.3M (0.38% of mcap) signals capitulation. The bullish counter—three active governance votes expanding v4 to five chains—is real but slow. L2 deployments take quarters to show in revenue, and even 20% growth only gets burn/emission to 0.85:1. The critical piece missing: real-yield RFC stuck in forum with no vote timeline. Without that regime shift, UNI stays trapped in reflexive valuation where price drops worsen inflation math. Derivatives show equilibrium (neutral funding, 1.72 long/short), not conviction. Expect retest of $4.50-$4.80 institutional zone before recovery. The trade: either wait for sub-$4.50 capitulation or front-run v4 revenue data if you believe L2 expansion delivers faster than consensus expects.",
+      "zh": "UNI单周暴跌19%至5.26美元，市场终于定价结构性现实：协议仍处于年化1.93%净通胀状态。按5.26美元计算，154万美元年化回购预算仅销毁293万枚UNI，对比2000万枚固定增发。这不是暂时失衡，是数学问题。财政部5.96美元回购锚点显示DAO自身定价高13%，但价格守不住。日成交量1230万美元(占市值0.38%)预示投降而非吸筹。看涨因素——三项治理投票将v4扩至五条链——确实存在但见效慢。L2部署需数季才体现在收入上，即使增长20%也只使销毁/增发比达0.85:1。关键缺失：实际收益RFC停在论坛无投票时间表。没有机制转变，UNI困于反射性估值——价格跌反而恶化通胀数学。衍生品呈均衡态(资金费率中性，多空比1.72)，无信念支撑。预期重测4.50-4.80美元机构建仓区后才能反弹。交易策略：要么等4.50美元以下投降，要么提前布局v4收入增长——如果你相信L2扩张会比共识预期更快兑现。"
+    }
+  },
+  "savedAt": "2026-11-17T17:38:19.765Z"
+}
