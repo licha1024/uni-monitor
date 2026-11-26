@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-26T18:23:53.226Z",
+    "dateISO": "2026-11-26",
+    "market": {
+      "priceUsd": 4.629,
+      "priceChange24hPct": -0.8567144998929115,
+      "priceChange7dPct": 3.4644613321412465,
+      "volume24hUsd": 6069524.604534271,
+      "marketCapUsd": 2803258681,
+      "fdvUsd": 4088123612,
+      "ath": 44.92,
+      "athChangePct": -89.71904
+    },
+    "protocol": {
+      "tvlUsd": 3245236827,
+      "tvlChange7dPct": 8.427522055959,
+      "fees24hUsd": 1652797,
+      "fees7dUsd": 12689921.280000001,
+      "revenue24hUsd": 239479,
+      "revenue7dUsd": 1606851,
+      "unichainTvlUsd": 20602150.910995934
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 885352418.7861971,
+      "burnedTotal": 114647581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 31086720.125,
+      "fundingRatePct": 0.00814418289162,
+      "longShortRatio": 1.61,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 1691.17,
+      "uniEthRatio": 0.0027371582986926205,
+      "btcDominance": 57.92742036007639,
+      "defiTvlUsd": 68692318971.679756
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "SEC's 2026 Guidance: Does Reliance on a Single Development Team Undermine Decentralization (https://gov.uniswap.org/t/secs-2026-guidance-does-reliance-on-a-single-development-team-undermine-decentralization/26351)",
+        "[Temp Check] Protocol Fee Expansion: v4 on Five More Chains (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-v4-on-five-more-chains/26349)",
+        "[Temp Check] Upgrade the v4 Protocol Fee System (https://gov.uniswap.org/t/temp-check-upgrade-the-v4-protocol-fee-system/26348)",
+        "[Temp Check] Upgrade VolatilePair hook and update X Layer Releaser (https://gov.uniswap.org/t/temp-check-upgrade-volatilepair-hook-and-update-x-layer-releaser/26337)",
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "UNI stuck below its own $5.96 DAO fair-value anchor; net inflation still outweighs the burn, but v4 fee expansion is the live catalyst.",
+      "zh": "UNI 仍压在 DAO 自设的 $5.96 公允价值锚之下；净通胀仍大于销毁量, 但 v4 费用开关扩容是当前最实在的催化剂."
+    },
+    "stance": "neutral",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "Annualized revenue $83.79M → 17% buyback burns only 3.08M UNI/yr against 20M emission, leaving net supply +1.91%/yr inflationary.",
+        "zh": "年化协议收入 $83.79M, 17% 回购仅销毁 3.08M UNI, 对冲不了 20M 的固定增发, 净供应仍 +1.91%/年通胀."
+      },
+      {
+        "en": "TVL +8.43% over 7d to $3.25B and two v4 fee-expansion temp checks (5 more chains + fee system upgrade) are live in the forum.",
+        "zh": "TVL 7 日 +8.43% 至 $3.25B, 论坛同时挂着两个 v4 费用开关扩容的 temp check(新增五条链 + 费率系统升级)."
+      },
+      {
+        "en": "Spot at $4.63 sits 22% below the $5.96 treasury-burn anchor and inside the $4–7 institutional accumulation zone; funding flat +0.01%, OI thin at $31M.",
+        "zh": "现货 $4.63 低于 $5.96 国库销毁锚 22%, 处于 $4–7 机构吸筹区; funding 持平 +0.01%, 未平仓合约仅 $31M, 盘面轻."
+      }
+    ],
+    "contrarianObservation": {
+      "en": "If both v4 temp checks reach on-chain vote and pass, revenue base could step up 30–50% mechanically; at $4.63 that flips net-emission math toward neutral/deflationary before any real-yield RFC is even tabled. The setup is asymmetric long, not range-bound.",
+      "zh": "若两个 v4 temp check 都推进到正式投票并通过, 收入基数可机械性抬升 30–50%; 在 $4.63 的价位上, 这足以把净增发算式推向中性甚至通缩, 且根本不需要 real yield 提案先过关. 这其实是不对称做多结构, 而非震荡."
+    },
+    "watchNext": [
+      {
+        "en": "Whether the two v4 fee-expansion temp checks escalate from forum to Snapshot/on-chain vote within 2–3 weeks.",
+        "zh": "两个 v4 费用开关 temp check 能否在 2–3 周内从论坛推进到 Snapshot 或链上投票."
+      },
+      {
+        "en": "Any RFC movement on redirecting buybacks from burn to stakers — the real regime-change trigger.",
+        "zh": "回购从销毁改为分配给质押者的 RFC 是否有新动向, 这才是真正的范式切换触发点."
+      },
+      {
+        "en": "BTC dominance at 57.93%; a roll-over would unlock alt beta, a continuation keeps UNI bid-less.",
+        "zh": "BTC.D 已 57.93%, 若见顶回落可释放山寨 beta, 若继续走高 UNI 将继续无买盘."
+      }
+    ],
+    "fullReasoning": {
+      "en": "Headline price action (-0.86% 24h, +3.46% 7d) is noise; the real tape is the supply math. At $4.63, 17% of $83.79M annualized revenue retires ~3.08M UNI against 20M emission — UNI is still net +1.91% inflationary despite the burn narrative. That is why spot cannot hold above the $5.96 DAO anchor: the market is pricing exactly this gap. On the other hand, TVL is up 8.43% in a week, protocol revenue is real, and two concrete temp checks (v4 on five more chains + fee system upgrade) target the one lever that actually matters — expanding the revenue base so burn > emission at today's price. Derivatives tell you no one is positioned: funding ~0, OI only $31M on a $2.8B mcap, L/S 1.61 is mild retail long bias, not fuel. BTC dominance at 57.93% keeps alt beta suppressed. The SEC decentralization thread is a tail risk worth noting but not pricing. Net: range-bound $4–5 until one of three things prints — v4 fee expansion vote, a real-yield RFC, or a BTC.D roll. Opportunistic bid belongs in the $4.00–4.20 zone with a stop under $3.80; chasing above $5 before governance delivers is paying for hope.",
+      "zh": "表面价格(-0.86% 24h, +3.46% 7d)是噪音, 真正的盘面是供应算式. $4.63 价位上, 年化收入 $83.79M 的 17% 回购只能销毁约 3.08M UNI, 对冲不了 20M 增发, 即便有销毁叙事, UNI 仍是 +1.91% 的净通胀资产. 这正是现货无法站稳 $5.96 DAO 国库锚之上的原因, 市场精确定价了这个缺口. 另一面, TVL 7 日 +8.43%, 协议收入是真金白银, 论坛上两个 temp check(v4 新增五条链, 以及费率系统升级)瞄准的正是唯一真正重要的杠杆, 即扩大收入基数, 让销毁在当前价位超过增发. 衍生品告诉你没人上杠杆: funding 约 0, $2.8B 市值下 OI 仅 $31M, 多空账户比 1.61 只是轻微散户偏多, 不构成燃料. BTC.D 57.93% 压制山寨 beta. SEC 去中心化讨论是需要记在本上的尾部风险, 但不进定价. 综合判断: $4–5 区间震荡, 直到以下三件事之一落地: v4 费用开关扩容投票, real yield RFC, 或 BTC.D 见顶. 机会性买入放在 $4.00–4.20 并在 $3.80 下设止损; 在治理落地之前追到 $5 以上就是在为预期付费."
+    }
+  },
+  "savedAt": "2026-11-26T18:25:04.553Z"
+}
