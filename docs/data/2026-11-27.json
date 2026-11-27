@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-27T18:09:38.576Z",
+    "dateISO": "2026-11-27",
+    "market": {
+      "priceUsd": 4.805,
+      "priceChange24hPct": 3.7572878427985206,
+      "priceChange7dPct": 2.0820055236881214,
+      "volume24hUsd": 9754191.858610101,
+      "marketCapUsd": 2919507024,
+      "fdvUsd": 4257746605,
+      "ath": 44.92,
+      "athChangePct": -89.29289
+    },
+    "protocol": {
+      "tvlUsd": 2943576200,
+      "tvlChange7dPct": 4.662453760482252,
+      "fees24hUsd": 1005328.71,
+      "fees7dUsd": 11944404.990000002,
+      "revenue24hUsd": 103206,
+      "revenue7dUsd": 1486708,
+      "unichainTvlUsd": 21075320.4310992
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 885310418.7861971,
+      "burnedTotal": 114689581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 29600704.49,
+      "fundingRatePct": 0.00098171981549,
+      "longShortRatio": 1.71,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 1669.92,
+      "uniEthRatio": 0.002877383347705279,
+      "btcDominance": 57.74163603542479,
+      "defiTvlUsd": 68207454769.68336
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "SEC's 2026 Guidance: Does Reliance on a Single Development Team Undermine Decentralization (https://gov.uniswap.org/t/secs-2026-guidance-does-reliance-on-a-single-development-team-undermine-decentralization/26351)",
+        "[Temp Check] Protocol Fee Expansion: v4 on Five More Chains (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-v4-on-five-more-chains/26349)",
+        "[Temp Check] Upgrade the v4 Protocol Fee System (https://gov.uniswap.org/t/temp-check-upgrade-the-v4-protocol-fee-system/26348)",
+        "[Temp Check] Upgrade VolatilePair hook and update X Layer Releaser (https://gov.uniswap.org/t/temp-check-upgrade-volatilepair-hook-and-update-x-layer-releaser/26337)",
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "UNI trades 19% below DAO's own $5.96 burn anchor while net inflation persists at +1.95%/year despite burn narrative.",
+      "zh": "UNI 交易价格较 DAO 自身 $5.96 回购成本锚点低 19%,尽管有销毁叙事,净通胀率仍维持在 +1.95%/年。"
+    },
+    "stance": "bearish",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "Price +3.76% to $4.805, but remains 19% below the $5.96 implied cost of DAO's 100M token treasury burn—the DAO valued UNI higher than the market does.",
+        "zh": "价格上涨 3.76% 至 $4.805,但仍较 DAO 1 亿枚代币国库销毁的隐含成本 $5.96 低 19%——DAO 对 UNI 的估值高于市场。"
+      },
+      {
+        "en": "TVL grew +4.66% to $2.94B and 7d protocol revenue hit $1.49M, but annualized burn (2.74M UNI) falls short of 20M annual emission—net +1.95% inflation persists.",
+        "zh": "TVL 增长 4.66% 至 $29.4 亿,7 日协议收入达 $149 万,但年化销毁量(274 万 UNI)低于 2000 万年度增发——净通胀率仍为 +1.95%。"
+      },
+      {
+        "en": "Open interest at $29.6M with neutral 0.00% funding and 1.71 long/short ratio indicates muted positioning—neither bulls nor bears are convicted.",
+        "zh": "持仓量 $2960 万,资金费率中性 0.00%,多空比 1.71,表明市场仓位温和——多空双方均缺乏信念。"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "Active governance discussions on v4 fee expansion to 5 chains plus fee system upgrades could double protocol revenue within 6 months—if executed, net inflation flips to deflation even at current price, but the market is pricing zero probability of governance execution.",
+      "zh": "治理层正积极讨论 v4 费用机制扩展至 5 条链及费用系统升级,可能在 6 个月内使协议收入翻倍——若落地,即使在当前价格下净通胀也将转为通缩,但市场对治理执行概率定价为零。"
+    },
+    "watchNext": [
+      {
+        "en": "Timing of governance votes on v4 fee expansion and fee system upgrade—revenue trajectory is the only variable that can resolve net inflation at current price.",
+        "zh": "v4 费用扩展和费用系统升级的治理投票时间——收入增长轨迹是当前价位下唯一能解决净通胀问题的变量。"
+      },
+      {
+        "en": "Price behavior at $5.96 resistance if rally occurs—this is where DAO treasury marked 'fair value' and will be a critical test of institutional conviction.",
+        "zh": "若出现反弹,关注 $5.96 阻力位表现——这是 DAO 国库标记的「公允价值」,将是机构信念的关键考验。"
+      },
+      {
+        "en": "Protocol revenue week-over-week—need sustained growth to $150M+ annualized to flip net inflation narrative at $4-5 price range.",
+        "zh": "协议收入环比变化——需要持续增长至年化 $1.5 亿以上,才能在 $4-5 价格区间扭转净通胀叙事。"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI's core problem remains unresolved: at $4.805, the protocol burns 2.74M UNI annually via buybacks while emitting 20M, resulting in +1.95% net inflation. This invalidates the 'burn narrative' that drove the post-fee-switch rally. More critically, price trades 19% below $5.96—the implied cost at which the DAO burned 100M treasury tokens. When the entity with the most information about protocol trajectory marks UNI at $5.96, trading at $4.80 signals either (a) the market knows something the DAO doesn't, or (b) capitulation pricing. Volume at $9.75M (0.33% of mcap) suggests the latter. The bullish case rests entirely on governance execution: temp checks for v4 fee expansion to 5 chains plus fee system upgrades could double protocol revenue to $150M+, flipping net inflation to deflation even at current price. But with no active votes and weak derivatives positioning (neutral funding, modest OI), the market assigns near-zero probability to governance delivery. TVL growth (+4.66%) confirms protocol health, but health doesn't equal token value when supply dynamics work against you. Until protocol revenue crosses the net-inflation breakeven threshold or price reclaims the $5.96 DAO anchor, the path of least resistance is sideways-to-down. The $4-7 accumulation zone is holding, but without a catalyst, there's no reason for it to break higher.",
+      "zh": "UNI 的核心问题仍未解决:在 $4.805 价位,协议通过回购年化销毁 274 万枚 UNI,同时增发 2000 万枚,导致净通胀率 +1.95%。这使得推动费用开关后反弹的「销毁叙事」失效。更关键的是,价格较 $5.96 低 19%——DAO 销毁 1 亿枚国库代币的隐含成本。当对协议轨迹掌握最多信息的实体将 UNI 标记为 $5.96 时,在 $4.80 交易意味着:(a)市场掌握 DAO 不知道的信息,或(b)投降式定价。$975 万交易量(市值的 0.33%)表明后者更可能。看涨逻辑完全依赖治理执行:v4 费用扩展至 5 条链及费用系统升级的温度检查可能使协议收入翻倍至 $1.5 亿以上,即使在当前价格下也能将净通胀转为通缩。但在没有活跃投票且衍生品仓位疲弱(资金费率中性、持仓量一般)的情况下,市场对治理交付的概率定价接近零。TVL 增长(+4.66%)确认协议健康,但当供给动力学不利时,健康不等于代币价值。在协议收入跨越净通胀盈亏平衡点或价格重新站上 $5.96 DAO 锚点之前,阻力最小路径是横盘至下跌。$4-7 积累区间正在守住,但没有催化剂,没有理由突破向上。"
+    }
+  },
+  "savedAt": "2026-11-27T18:10:22.241Z"
+}
