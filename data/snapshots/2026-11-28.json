@@ -1,0 +1,101 @@
+{
+  "snapshot": {
+    "timestamp": "2026-11-28T16:51:27.544Z",
+    "dateISO": "2026-11-28",
+    "market": {
+      "priceUsd": 4.676,
+      "priceChange24hPct": -2.5427261358899518,
+      "priceChange7dPct": -0.5318017443097101,
+      "volume24hUsd": 3875207.143361398,
+      "marketCapUsd": 2844189721,
+      "fdvUsd": 4147969893,
+      "ath": 44.92,
+      "athChangePct": -89.56852
+    },
+    "protocol": {
+      "tvlUsd": 2909974944,
+      "tvlChange7dPct": 0.8717074199378342,
+      "fees24hUsd": 1442776,
+      "fees7dUsd": 11160151.990000002,
+      "revenue24hUsd": 173576,
+      "revenue7dUsd": 1338926,
+      "unichainTvlUsd": 20403564.708358098
+    },
+    "onChain": {
+      "totalSupply": 1000000000,
+      "circulatingSupply": 885280418.7861971,
+      "burnedTotal": 114719581.21380293,
+      "treasuryBalance": 262247996.305835,
+      "top10ConcentrationPct": null,
+      "newBurns24h": null
+    },
+    "derivatives": {
+      "openInterestUsd": 29270429.136,
+      "fundingRatePct": 0.01,
+      "longShortRatio": 1.67,
+      "liquidations24hUsd": null
+    },
+    "crossMarket": {
+      "ethPriceUsd": 1653.04,
+      "uniEthRatio": 0.002828727677491168,
+      "btcDominance": 57.79564282490944,
+      "defiTvlUsd": 67532587259.69697
+    },
+    "governance": {
+      "activeProposals": [],
+      "recentDiscussion": [
+        "SEC's 2026 Guidance: Does Reliance on a Single Development Team Undermine Decentralization (https://gov.uniswap.org/t/secs-2026-guidance-does-reliance-on-a-single-development-team-undermine-decentralization/26351)",
+        "[Temp Check] Protocol Fee Expansion: v4 on Five More Chains (https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-v4-on-five-more-chains/26349)",
+        "[Temp Check] Upgrade the v4 Protocol Fee System (https://gov.uniswap.org/t/temp-check-upgrade-the-v4-protocol-fee-system/26348)",
+        "[Temp Check] Upgrade VolatilePair hook and update X Layer Releaser (https://gov.uniswap.org/t/temp-check-upgrade-volatilepair-hook-and-update-x-layer-releaser/26337)",
+        "URC-5: Token Venue Policy (https://gov.uniswap.org/t/urc-5-token-venue-policy/26307)"
+      ]
+    },
+    "errors": []
+  },
+  "analysis": {
+    "headline": {
+      "en": "UNI trades 21.5% below treasury's $5.96 burn anchor while net inflation bleeds 1.97%/year—governance fee upgrades are the only exit.",
+      "zh": "UNI 较财库 $5.96 回购成本低 21.5%，年净通胀达 1.97%——治理费用升级是唯一出路"
+    },
+    "stance": "bearish",
+    "confidence": "medium",
+    "keyChanges": [
+      {
+        "en": "Price declined 2.54% to $4.676, widening the discount to treasury's $5.96 burn cost basis to 21.5% below",
+        "zh": "价格下跌 2.54% 至 $4.676，相对财库 $5.96 回购成本的折价扩大至 21.5%"
+      },
+      {
+        "en": "Net emission persists at +17.46M UNI/year (+1.97% inflation) as $11.87M annualized buyback covers only 12.7% of 20M token emission",
+        "zh": "年净增发维持 +1746 万枚 (+1.97% 通胀)，$1187 万年化回购预算仅覆盖 2000 万代币增发的 12.7%"
+      },
+      {
+        "en": "Two governance temp checks propose v4 fee system expansion and upgrades, signaling potential tokenomics restructuring momentum",
+        "zh": "两项治理温度检测提议 v4 费用系统扩展与升级，显示代币经济学重构动能初现"
+      }
+    ],
+    "contrarianObservation": {
+      "en": "Smart accumulation thesis: treasury burned 100M UNI at $5.96 implied—a 21.5% markup from here—while protocol revenue grew 7d despite price stagnation, meaning burn efficiency improves silently if governance passes fee upgrades before market reprices the reduced dilution.",
+      "zh": "聪明资金逻辑：财库以隐含 $5.96 价格销毁 1 亿枚 UNI（较当前有 21.5% 溢价），协议收入在价格停滞期仍增长 7 天，意味着若治理在市场重新定价前通过费用升级，销毁效率将悄然改善、稀释压力下降"
+    },
+    "watchNext": [
+      {
+        "en": "Governance votes on fee system upgrade temp checks—passage would materially improve net inflation math and validate accumulation thesis",
+        "zh": "治理对费用系统升级温度检测的投票进展——通过将实质改善净通胀数学、验证建仓逻辑"
+      },
+      {
+        "en": "Protocol revenue trajectory: needs $94M annualized (35% increase from $69.82M) to reach inflation neutrality at current $4.676 price",
+        "zh": "协议收入走势：需年化 $9400 万（较当前 $6982 万增长 35%）才能在 $4.676 价位实现通胀中性"
+      },
+      {
+        "en": "Volume and OI recovery: current $3.88M daily volume and $29.27M open interest reflect zero conviction—breakout needs participation",
+        "zh": "成交量与持仓量复苏：当前日成交 $388 万、持仓 $2927 万反映零信念——突破需要参与度回归"
+      }
+    ],
+    "fullReasoning": {
+      "en": "UNI sits in structural limbo. At $4.676, it trades 21.5% below the treasury's own $5.96 burn valuation—a clear discount to the DAO's revealed preference. Yet the market refuses to arbitrage this gap because the net inflation problem is real and unresolved: annualized protocol revenue of $69.82M funds only $11.87M in buybacks (17% fee share), burning just 2.54M UNI against 20M token emission. Net dilution of 1.97%/year acts as a structural ceiling. Volume is anemic ($3.88M, 0.14% of mcap) and open interest trivial ($29.27M), signaling no institutional conviction either direction. The bearish case dominates over 1-4 weeks: weak crypto macro (ETH at $1.65K, BTC dominance 57.8%), persistent inflation drag, and no imminent catalyst. However, two governance temp checks on v4 fee system expansion introduce a credible path to fixing tokenomics. If upgrades pass and revenue grows while price stays flat, burn math improves mechanically. The contrarian long thesis hinges on governance moving faster than price discovery. For now, structural headwinds outweigh the treasury discount, but watch governance closely—it's the only variable that can flip the script.",
+      "zh": "UNI 陷入结构性僵局。在 $4.676 价位，相比财库自身 $5.96 回购估值折价 21.5%——对 DAO 显性偏好的明显低估。但市场拒绝套利这一缺口，因为净通胀问题真实且未解决：年化协议收入 $6982 万仅提供 $1187 万回购预算（17% 费用分成），仅销毁 254 万枚 UNI 而增发 2000 万枚。年净稀释 1.97% 构成结构性天花板。成交量疲弱（$388 万，仅占市值 0.14%）、持仓量微不足道（$2927 万），显示机构双向均无信念。1-4 周看空主导：加密宏观疲软（ETH 在 $1650、BTC 主导率 57.8%）、持续通胀拖累、无近期催化剂。然而，两项 v4 费用系统扩展的治理温度检测引入了修复代币经济学的可信路径。若升级通过且收入增长而价格持平，销毁数学将机械改善。逆向做多逻辑依赖治理动作快于价格发现。当前结构性逆风压倒财库折价优势，但需密切关注治理——这是唯一能翻转剧本的变量。"
+    }
+  },
+  "savedAt": "2026-11-28T16:52:11.286Z"
+}
